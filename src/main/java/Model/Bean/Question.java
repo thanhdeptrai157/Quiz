@@ -1,4 +1,4 @@
-package Models.Bean;
+package Model.Bean;
 
 public class Question {
     private final int idQuestion;
