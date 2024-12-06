@@ -9,7 +9,7 @@ public class DatabaseConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/quiz";
     private static final String USER = "root";
-    private static final String PASSWORD = "568389";
+    private static final String PASSWORD = "";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
 

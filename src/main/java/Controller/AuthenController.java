@@ -9,13 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/author")
-public class LoginController extends HttpServlet {
+@WebServlet(urlPatterns = "/authen")
+public class AuthenController extends HttpServlet {
     LoginBO loginBO = new LoginBO();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String mod = req.getParameter("mod");
+        String mod = req.getParameter("action");
 
         if(mod.equals("login")){
             login(req, resp);

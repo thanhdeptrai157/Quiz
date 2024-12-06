@@ -16,14 +16,14 @@
 
             if (password !== repassword) {
                 alert("Passwords do not match!");
-                return false; // Ngăn form gửi đi
+                return false;
             }
-            return true; // Cho phép gửi form
+            return true;
         }
     </script>
 </head>
 <body>
-<form name="signupForm" action="../author?mod=signup" method="post" onsubmit="return validateForm()">
+<form name="signupForm" action="../authen?action=signup" method="post" onsubmit="return validateForm()">
     Name: <input type="text" name="name" required><br>
     Username: <input type="text" name="username" required><br>
     Password: <input type="password" name="password" required><br>
