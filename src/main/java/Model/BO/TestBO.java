@@ -12,4 +12,10 @@ public class TestBO {
         TestDAO testDAO = new TestDAO();
         return testDAO.getMaxIdTest();
     }
+
+    public Test getTestById(int id){
+        TestDAO testDAO = new TestDAO();
+        return testDAO.GetTestById(id);
+    }
+
 }
