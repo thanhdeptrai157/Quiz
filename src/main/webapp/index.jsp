@@ -8,5 +8,8 @@
 <h1>Quiz web</h1>
 <br/>
 
+<a href="/Login/Login.jsp">Login</a> <br>
+<a href="/Login/signup.jsp">Login</a> <br>
+
 </body>
 </html>

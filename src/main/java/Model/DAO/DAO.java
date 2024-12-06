@@ -21,9 +21,7 @@ public class DAO {
 
             preparedStatement = connection.prepareStatement(query);
 
-            for (int i = 0; i < params.length; i++) {
-                preparedStatement.setString(i + 1, params[i].toString());
-            }   
+            setParameter(preparedStatement, params);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -38,9 +36,7 @@ public class DAO {
 
             preparedStatement = connection.prepareStatement(query);
 
-            for (int i = 0; i < params.length; i++) {
-                preparedStatement.setString(i + 1, params[i].toString());
-            }
+            setParameter(preparedStatement, params);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -54,6 +50,28 @@ public class DAO {
             statement.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void setParameter(PreparedStatement statement, Object... parameters) {
+        try {
+            for (int i = 0; i < parameters.length; i++) {
+                Object parameter = parameters[i];
+                int index = i + 1;
+                if (parameter instanceof Long) {
+                    statement.setLong(index, (Long) parameter);
+                } else if (parameter instanceof String) {
+                    statement.setString(index, (String) parameter);
+                } else if (parameter instanceof Integer) {
+                    statement.setInt(index, (Integer) parameter);
+                } else if (parameter instanceof Boolean) {
+                    statement.setBoolean(index, (Boolean) parameter);
+                } else if (parameter instanceof Date) {
+                    statement.setDate(index, (Date) parameter);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
