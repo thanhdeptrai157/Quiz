@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/test")
 public class TestController extends HttpServlet {
@@ -37,6 +38,13 @@ public class TestController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String action = req.getParameter("action");
+        if(action.equals("getQuestion")){
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            Test test = tbo.getTestById(idTest);
+            req.setAttribute("test", test);
+            List<Question> quetions = qbo.getAllQuestionByIDTest(idTest);
+            req.setAttribute("quetions", quetions);
+        }
     }
 }
