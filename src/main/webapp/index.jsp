@@ -11,6 +11,6 @@
 
 <a href="Login/login.jsp">Login</a> <br>
 <a href="Signup/signup.jsp">Login</a> <br>
-
+<a href="test?action=getQuestion">Làm kiểm tra</a>
 </body>
 </html>

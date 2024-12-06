@@ -40,11 +40,12 @@ public class TestController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if(action.equals("getQuestion")){
-            int idTest = Integer.parseInt(req.getParameter("idTest"));
-            Test test = tbo.getTestById(idTest);
-            req.setAttribute("test", test);
-            List<Question> quetions = qbo.getAllQuestionByIDTest(idTest);
-            req.setAttribute("quetions", quetions);
+            //int idTest = Integer.parseInt(req.getParameter("idTest"));
+            //Test test = tbo.getTestById(idTest);
+           // req.setAttribute("test", test);
+            List<Question> questions = qbo.getAllQuestionByIDTest(3);
+            req.setAttribute("questions", questions);
+            req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
         }
     }
 }
