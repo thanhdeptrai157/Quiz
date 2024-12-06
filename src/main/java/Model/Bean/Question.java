@@ -1,8 +1,8 @@
 package Model.Bean;
 
 public class Question {
-    private final int idQuestion;
-    private final int idTest;
+    private int idQuestion;
+    private int idTest;
     private String question;
     private String answer1;
     private String answer2;
@@ -11,6 +11,14 @@ public class Question {
 
     public Question(int idQuestion, int idTest, String question, String answer1, String answer2, String answer3, String answer4) {
         this.idQuestion = idQuestion;
+        this.idTest = idTest;
+        this.question = question;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
+    }
+    public Question(int idTest, String question, String answer1, String answer2, String answer3, String answer4) {
         this.idTest = idTest;
         this.question = question;
         this.answer1 = answer1;

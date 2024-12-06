@@ -7,6 +7,7 @@
 <body>
 <h1>Quiz web</h1>
 <br/>
+    <a href="NewTest/new_test.jsp">New Test</a>
 
 </body>
 </html>
