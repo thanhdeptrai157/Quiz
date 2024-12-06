@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form action="../login" method="post" >
+<form action="../author?mod=login" method="post" >
     username <input type="text" name="username">
     password <input type="password" name="password">
     <button type="submit">OK</button>

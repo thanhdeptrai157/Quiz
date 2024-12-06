@@ -9,5 +9,8 @@
 <br/>
     <a href="NewTest/new_test.jsp">New Test</a>
 
+<a href="/Login/Login.jsp">Login</a> <br>
+<a href="/Login/signup.jsp">Login</a> <br>
+
 </body>
 </html>
