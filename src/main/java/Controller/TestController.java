@@ -36,9 +36,18 @@ public class TestController extends HttpServlet {
                         wrongAnswers[2]));
             }
         }
+        else if(action.equalsIgnoreCase("getQuestion")){
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            System.out.println(idTest);
+            Test test = tbo.getTestById(idTest);
+            req.setAttribute("test", test);
+            List<Question> questions = qbo.getAllQuestionByIDTest(idTest);
+            req.setAttribute("questions", questions);
+            req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
+        }
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if(action.equals("getQuestion")){
             //int idTest = Integer.parseInt(req.getParameter("idTest"));

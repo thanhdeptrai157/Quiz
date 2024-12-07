@@ -59,6 +59,14 @@ public class AuthenController extends HttpServlet {
         String password = req.getParameter("password");
         String role = req.getParameter("role");
 
-        loginBO.SignUP(name, username, password, role);
+        boolean isSignUpSuccess = loginBO.SignUP(name, username, password, role);
+
+        if(isSignUpSuccess){
+            System.out.println("Dang ky thanh cong");
+        }
+        else{
+            System.out.println("Dang ky that bai");
+        }
+
     }
 }
