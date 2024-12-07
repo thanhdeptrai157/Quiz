@@ -22,11 +22,12 @@ public class HistoryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
+        System.out.println(action);
         if(action.equals("listHistoryTest")){
             int idTeacher = Integer.parseInt(req.getParameter("idTeacher"));
             List<HistoryTest> listHistoryTest = historyBO.GetHistoryTest(idTeacher);
-
+            req.getSession().setAttribute("listHistoryTest", listHistoryTest);
+            resp.sendRedirect("Teacher/test_manager.jsp");
         }
         else if(action.equals("getHistoryStudent")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));

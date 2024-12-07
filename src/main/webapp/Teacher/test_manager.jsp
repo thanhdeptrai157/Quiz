@@ -1,4 +1,7 @@
-<%--
+<%@ page import="Model.Bean.Account" %>
+<%@ page import="Model.Bean.HistoryTest" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Bean.Test" %><%--
   Created by IntelliJ IDEA.
   User: CONG THANH
   Date: 12/7/2024
@@ -12,185 +15,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quản Lý Bài Thi</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      display: flex;
-      height: 100vh;
-      flex-direction: column;
-    }
-    .sidebar {
-      position: fixed;
-      height: 100%;
-      width: 250px;
-      background-color: #2c3e50;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-    }
-    .sidebar h1 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      text-align: center;
-    }
-    .sidebar button {
-      padding: 10px;
-      margin: 10px 0;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .sidebar button:hover {
-      background-color: #2980b9;
-    }
-
-    .header {
-      position: fixed;
-      background-color: #ecf0f1;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #bdc3c7;
-      width: 100%;
-    }
-    .header .user-info {
-      display: flex;
-      align-items: center;
-    }
-    .header .user-info span {
-      margin-right: 15px;
-      font-size: 14px;
-    }
-    .header .user-info button {
-      padding: 5px 10px;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .header .user-info button:hover {
-      background-color: #c0392b;
-    }
-
-    .main {
-      margin-top: 50px;
-      display: flex;
-      flex: 1;
-    }
-
-    .content {
-
-      flex: 1;
-      margin-left: 250px;
-      padding: 20px;
-      overflow-y: auto;
-      background-color: #f4f6f7;
-      margin-top: 15px;
-    }
-    .card {
-      background-color: white;
-      margin-bottom: 20px;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #2c3e50;
-    }
-    .card p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #7f8c8d;
-    }
-  </style>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/Teacher/style.css">
 </head>
+<%
+  Account account = (Account) request.getSession().getAttribute("account");
+  if(account == null){
+    response.sendRedirect("../index.jsp");
+  }
+%>
 <body>
 <div class="header">
   <div class="title">
     <h2>Danh Sách Bài Thi</h2>
   </div>
   <div class="user-info">
-    <span>Tên User</span>
-    <button>Đăng Xuất</button>
+    <span><%= account != null ? account.getName() : ""%></span>
+    <button><a href="../authen?action=logout">Đăng Xuất</a></button>
   </div>
 </div>
 <div class="sidebar">
   <h1>Quản Lý Bài Thi</h1>
-  <button>Thêm Bài Thi</button>
+  <button><a href="NewTest/new_test.jsp">Thêm bài thi</a></button>
 </div>
 <div class="main">
-
-
   <div class="content">
-    <div class="card">
-      <h3>Bài Thi 1</h3>
-      <p>Số Câu Hỏi: 20</p>
-      <p>Số Người Tham Gia: 50</p>
-      <p>Số Lượt Tham Gia: 120</p>
-    </div>
-
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
 
   </div>
 </div>
 </body>
+<script>
+  var listTest = [
+    <%
+        List<HistoryTest> tests = (List<HistoryTest>) request.getSession().getAttribute("listHistoryTest");
+        System.out.println(tests.size());
+        for(int i = 0; i <tests.size(); ++i){
+            HistoryTest t = tests.get(i);
+    %>
+    {
+      nameTest: "<%=t.getNameTest()%>",
+      numContestants: "<%=t.getNumberOfContestants()%>",
+      numQuestions: "<%=t.getNumberOfQuestions()%>",
+
+    }<%= i< tests.size() - 1 ? ", ": ""%>
+    <%
+        }
+    %>
+  ];
+  var contentDiv = document.querySelector('.content');
+
+  listTest.forEach(test => {
+
+    var card = document.createElement('div');
+    card.classList.add('card');
+
+    var title = document.createElement('h3');
+    title.textContent = test.nameTest;
+    card.appendChild(title);
+
+    var numQuestions = document.createElement('p');
+    numQuestions.textContent = "Số Câu Hỏi: " + test.numQuestions;
+    card.appendChild(numQuestions);
+
+    var numContestants = document.createElement('p');
+    numContestants.textContent = "Số Người Tham Gia: "+ test.numContestants;
+    card.appendChild(numContestants);
+
+    contentDiv.appendChild(card);
+  });
+
+
+
+</script>
 </html>

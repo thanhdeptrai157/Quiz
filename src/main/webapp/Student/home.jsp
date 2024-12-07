@@ -1,4 +1,6 @@
-<%--
+<%@ page import="Model.Bean.Account" %>
+<%@ page import="Model.Bean.Test" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: CONG THANH
   Date: 12/7/2024
@@ -12,117 +14,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    *{
-        padding: 0;
-        margin: 0;
+<%
+    Account account = (Account) request.getSession().getAttribute("account");
+    if(account == null){
+        response.sendRedirect("../index.jsp");
     }
-    header{
-        width: 100%;
-        height: 50px;
-        background-color: black;
-        position: fixed;
-        top:0;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .main{
-        height: 100vh;
-        background-color: #f0f0f0;
-        padding: 20px 150px;
 
-    }
-    .main_content{
-
-        height: 100vh;
-    }
-    .join{
-        width: 100%;
-        height: 200px;
-
-        margin-top: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-
-    }
-    .input_container {
-        background-color: #ffffff;
-        padding: 15px;
-        border-radius: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    input {
-        border: none;
-        outline: none;
-        font-size: 16px;
-        flex: 1;
-        padding: 10px;
-        margin-right: 10px;
-    }
-    input::placeholder {
-        color: #aaa;
-        font-size: 14px;
-    }
-    .btn_join {
-        background-color: #921a66;
-        color: white;
-        border: none;
-        outline: none;
-        padding: 10px 20px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-    .btn_join:hover {
-        background-color: #2a863d;
-    }
-    .input_zone{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60%;
-        background-color: white;
-        height: inherit;
-        border-radius: 10px;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    .welcome{
-        background-color: white;
-        width: 30%;
-        height: inherit;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    .test_zone{
-        margin-top: 50px;
-    }
-</style>
+%>
 <body>
 <header>
     <div>
         Quizziz
     </div>
     <div>
-        <span>Name user</span>
-        <a href="">Đăng xuất</a>
+        <span> <%= account != null ? account.getName() : ""%></span>
+        <a href="../authen?action=logout">Đăng xuất</a>
     </div>
 </header>
+
 <section class="main">
     <div class="main_content">
         <div class="join" >
             <div class="input_zone">
-                <form action="test?action=getQuestion" method="post" class="code_input">
+                <form action="../test?action=getQuestion" method="post" class="code_input">
                     <div class="input_container">
                         <input type="text" placeholder="Nhập mã tham gia" name="idTest">
                         <button class="btn_join" type="submit">Tham gia</button>
@@ -130,19 +46,77 @@
                 </form>
             </div>
             <div class="welcome">
-                <span>Chào mừng Nguyễn Công Thành</span><br>
-                <img src="hehe.png" alt="" width="50%">
+                <span>Chào mừng <%= account != null ? account.getName() : ""%></span><br>
+                <img src="img/hehe.png" alt="" width="50%">
             </div>
         </div>
         <div class="test_zone">
             <h2>Danh sách bài kiểm tra</h2>
             <div class="test_list">
-                <form action="">
 
-                </form>
             </div>
         </div>
     </div>
 </section>
 </body>
+
+<script>
+    var testList = [
+        <%
+            List<Test> tests = (List<Test>) request.getSession().getAttribute("testList");
+            for(int i = 0; i < tests.size(); ++i){
+                Test t = tests.get(i);
+        %>
+        {
+            idTest: "<%=t.getIdTest()%>",
+            nameTest: "<%=t.getNameTest()%>",
+            idTeacher: "<%=t.getIdTeacher()%>",
+            time: "<%=t.getTime()%>"
+        }<%= (i < tests.size() - 1) ? "," : ""%>
+        <%
+            }
+        %>
+    ];
+    const testListContainer = document.querySelector('.test_list');
+    console.log(testList.length);
+
+    testList.forEach(test => {
+        const testCard = document.createElement('div');
+        testCard.className = 'test_card';
+        const title = document.createElement('h3');
+        title.textContent = test.nameTest;
+
+        const idInfo = document.createElement('p');
+        idInfo.innerHTML = "<strong>ID:</strong>"+ test.idTest;
+
+        const teacherInfo = document.createElement('p');
+        teacherInfo.innerHTML = "<strong>Giáo viên:</strong>"+ test.idTeacher;
+
+        const timeInfo = document.createElement('p');
+        timeInfo.innerHTML = "<strong>Thời gian:</strong>"+ test.time +"phút";
+
+        const form = document.createElement('form');
+        form.action = "../test?action=getQuestion";
+        form.method = "post";
+
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'idTest';
+        hiddenInput.value = test.idTest;
+
+        const startButton = document.createElement('button');
+        startButton.type = 'submit';
+        startButton.className = 'btn_start';
+        startButton.textContent = 'Bắt đầu';
+
+        form.appendChild(hiddenInput);
+        form.appendChild(startButton);
+        testCard.appendChild(title);
+        testCard.appendChild(idInfo);
+        testCard.appendChild(teacherInfo);
+        testCard.appendChild(timeInfo);
+        testCard.appendChild(form);
+        testListContainer.appendChild(testCard);
+    });
+</script>
 </html>

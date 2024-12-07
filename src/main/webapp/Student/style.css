@@ -1,0 +1,214 @@
+/* General Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Typography */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding-top: 50px; /* To offset fixed header */
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Header Styling */
+header {
+    width: 100%;
+    height: 60px;
+    background-color: #222;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+header div:first-child {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+header div:last-child span {
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+header div:last-child a {
+    background: #dc3545;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+header div:last-child a:hover {
+    background: #c82333;
+}
+
+/* Main Section */
+.main {
+    padding: 30px 150px;
+}
+
+.main_content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Join Section */
+.join {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.input_zone {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.input_container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+input {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #007bff;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+.btn_join {
+    margin-left: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_join:hover {
+    background-color: #218838;
+}
+
+.welcome {
+    flex: 2;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.welcome span {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Test Zone */
+.test_zone {
+    margin-top: 20px;
+}
+
+.test_zone h2 {
+    font-size: 1.8em;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.test_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.test_card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.test_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.test_card h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.test_card p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.btn_start {
+    margin-top: 15px;
+    background: #12752a;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+
+.btn_start:hover {
+    background: #218838;
+}
