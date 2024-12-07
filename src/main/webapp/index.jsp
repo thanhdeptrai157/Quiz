@@ -113,6 +113,11 @@
     <div>
         Quiziz - Tham gia thi trắc nghiệm
     </div>
+    <%
+        String user = (String) request.getSession().getAttribute("");
+
+    %>
+
     <div>
         <a href="Login/login.jsp">Đăng nhập</a>
         <a href="Signup/signup.jsp">Đăng ký</a>

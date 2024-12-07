@@ -71,7 +71,6 @@
 
 
     questionElement.textContent = currentQuestion.question;
-
     answerButtons.forEach((button, index) => {
       num_question.textContent = currentQuestionIndex + 1 + "/" +  questionsData.length;
       button.textContent = currentQuestion.answers[index].text;
@@ -81,7 +80,7 @@
         } else {
           alert("Wrong answer");
         }
-        currentQuestionIndex = (currentQuestionIndex + 1) % questionsData.length;
+          currentQuestionIndex = (currentQuestionIndex + 1) % questionsData.length;
         loadQuestion();
       };
     });

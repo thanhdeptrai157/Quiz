@@ -52,7 +52,7 @@ public class AuthenController extends HttpServlet {
         }
     }
 
-    public void SignUp(HttpServletRequest req, HttpServletResponse resp){
+    public void SignUp(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -62,6 +62,7 @@ public class AuthenController extends HttpServlet {
 
         if(isSignUpSuccess){
             System.out.println("Dang ky thanh cong");
+            resp.sendRedirect("index.jsp");
         }
         else{
             System.out.println("Dang ky that bai");

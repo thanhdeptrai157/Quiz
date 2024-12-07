@@ -190,7 +190,6 @@
       <p>Số Lượt Tham Gia: 60</p>
     </div>
 
-    <!-- Thêm nhiều card tương tự tại đây -->
   </div>
 </div>
 </body>
