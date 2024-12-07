@@ -1,0 +1,92 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #5d0775, #d3c0e5);
+    color: #5d0775;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+form {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 30px 40px;
+    width: 350px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 2px solid #d3c0e5;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background: #f9f9f9;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus {
+    border-color: #5d0775;
+    background: #f4e8fc;
+}
+
+
+form button {
+    background: linear-gradient(135deg, #5d0775, #a952cc);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+
+form button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(93, 7, 117, 0.3);
+}
+
+form input::placeholder {
+    color: #b39cd4;
+    font-style: italic;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+}
+@media (max-width: 400px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    form h1 {
+        font-size: 22px;
+    }
+}

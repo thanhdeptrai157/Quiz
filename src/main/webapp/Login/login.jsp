@@ -9,13 +9,17 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <form action="../authen?action=login" method="post" >
     username <input type="text" name="username">
     password <input type="password" name="password">
-    <button type="submit">OK</button>
+    <div class="btn">
+        <button type="submit">Login</button>
+    </div>
+
 </form>
 
 
