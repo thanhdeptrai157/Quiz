@@ -3,6 +3,7 @@ package Controller;
 import Model.BO.QuestionBO;
 import Model.BO.TestBO;
 import Model.Bean.Question;
+import Model.Bean.Subject;
 import Model.Bean.Test;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,5 +50,16 @@ public class TestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+
+        if(action.equalsIgnoreCase("getSubject")){
+            List<Subject> subjects = tbo.getAllSubject();
+            req.setAttribute("subjects", subjects);
+        }
+
+        else if(action.equalsIgnoreCase("getTestByIdSubject")){
+            int idSubject = Integer.parseInt(req.getParameter("idSubject"));
+            List<Test> listTest = tbo.getTestByIDSubject(idSubject);
+            req.setAttribute("listTest", listTest);
+        }
     }
 }

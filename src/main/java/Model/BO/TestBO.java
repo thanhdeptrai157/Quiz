@@ -1,10 +1,12 @@
 package Model.BO;
 
+import Model.Bean.Subject;
 import Model.Bean.Test;
 import Model.Bean.TestTaking;
 import Model.DAO.TestDAO;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Random;
 
 public class TestBO {
@@ -20,6 +22,16 @@ public class TestBO {
     public Test getTestById(int id){
         TestDAO testDAO = new TestDAO();
         return testDAO.GetTestById(id);
+    }
+
+    public List<Subject> getAllSubject(){
+        TestDAO testDAO = new TestDAO();
+        return testDAO.getAllSubject();
+    }
+
+    public List<Test> getTestByIDSubject(int idSubject){
+        TestDAO testDAO = new TestDAO();
+        return testDAO.getTestByIDSubject(idSubject);
     }
 
     public int GetIDTestByIDTestTaking(String TestTaking){
