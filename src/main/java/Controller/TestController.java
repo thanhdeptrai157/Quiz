@@ -3,6 +3,7 @@ package Controller;
 import Model.BO.QuestionBO;
 import Model.BO.TestBO;
 import Model.Bean.Question;
+import Model.Bean.Subject;
 import Model.Bean.Test;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @WebServlet("/test")
@@ -44,9 +46,34 @@ public class TestController extends HttpServlet {
             req.setAttribute("questions", questions);
             req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
         }
+        else if(action.equalsIgnoreCase("addTestTaking")){
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            String timeStart = req.getParameter("timeStart");
+            String timeEnd = req.getParameter("timeEnd");
+            boolean set = tbo.AddTestTaking(idTest, timeStart, timeEnd);
+
+            if(set){
+                System.out.println("add thanh cong");
+            }
+            else {
+                System.out.println("add khong thanh cong");
+            }
+        }
+
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+
+        if(action.equalsIgnoreCase("getSubject")){
+            List<Subject> subjects = tbo.getAllSubject();
+            req.setAttribute("subjects", subjects);
+        }
+
+        else if(action.equalsIgnoreCase("getTestByIdSubject")){
+            int idSubject = Integer.parseInt(req.getParameter("idSubject"));
+            List<Test> listTest = tbo.getTestByIDSubject(idSubject);
+            req.setAttribute("listTest", listTest);
+        }
     }
 }
