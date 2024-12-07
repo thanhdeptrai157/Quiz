@@ -27,31 +27,29 @@ public class AuthenController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        String action = req.getParameter("action");
+        if(action.equals("logout")){
+            logout(req, resp);
+        }
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        System.out.println(username);
-        System.out.println(password);
         Account account = loginBO.login(username, password);
         String role = account.getRole();
+        req.getSession().setAttribute("account", account);
         if(role.equals("admin")){
-            System.out.println("admin");
-            req.getSession().setAttribute("role", role);
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }
         else if(role.equals("student")){
-            System.out.println("student");
-            req.getSession().setAttribute("role", role);
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+            resp.sendRedirect("test?action=getTest");
         }
         else if(role.equals("teacher")) {
-            System.out.println("teacher");
-            req.getSession().setAttribute("role", role);
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+
+            resp.sendRedirect("history?action=listHistoryTest&idTeacher="+account.getId());
         }
+
     }
 
     public void SignUp(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -70,5 +68,9 @@ public class AuthenController extends HttpServlet {
             System.out.println("Dang ky that bai");
         }
 
+    }
+    public void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getSession().invalidate();
+        resp.sendRedirect("index.jsp");
     }
 }

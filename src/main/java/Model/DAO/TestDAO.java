@@ -37,7 +37,7 @@ public class TestDAO {
         }
     }
 
-    public Test GetTestById(int id) {
+    public Test getTestById(int id) {
         DAO dao = new DAO();
         String sql = "SELECT * FROM test WHERE idTest = ? ;";
 
@@ -61,7 +61,7 @@ public class TestDAO {
         }
     }
 
-    public List<Test> GetTestByIdTeacher(int idTeacher) {
+    public List<Test> getTestByIdTeacher(int idTeacher) {
         DAO dao = new DAO();
         String sql = "SELECT * FROM test WHERE idTest = ? ;";
         List<Test> listTest = new ArrayList<>();
@@ -84,7 +84,7 @@ public class TestDAO {
         }
     }
 
-    public List<Test> GetAllTest() {
+    public List<Test> getAllTest() {
         DAO dao = new DAO();
         String sql = "SELECT * FROM test ;";
         List<Test> listTest = new ArrayList<>();
@@ -107,6 +107,8 @@ public class TestDAO {
             throw new RuntimeException(e);
         }
     }
+ 
+   
 
     public boolean AddTestTaking(TestTaking testTaking){
         try{
@@ -123,7 +125,6 @@ public class TestDAO {
         }
         return false;
     }
-
     public int getIdTestByIDTestTaking(String idTestTaking){
         DAO dao = new DAO();
         String sql = "SELECT * FROM testTaking WHERE id = ?  AND NOW() BETWEEN timeStart AND timeEnd;";
@@ -137,18 +138,17 @@ public class TestDAO {
             return -1;
         }
     }
-
     public List<Subject> getAllSubject(){
         DAO dao = new DAO();
         List<Subject> listSubject = new ArrayList<>();
         String sql = "SELECT * FROM subject;";
+
         try {
             ResultSet rs = dao.Query(sql);
             while(rs.next()){
-                int idTest = rs.getInt("idTest");
-                String nameTest = rs.getString("nameTest");
-
-                listSubject.add(new Subject(idTest, nameTest));
+                int idSubject = rs.getInt("idSubject");
+                String nameSubject = rs.getString("nameSubject");
+                listSubject.add(new Subject(idSubject, nameSubject));
             }
             return listSubject;
         } catch (SQLException | ClassNotFoundException e) {
@@ -156,7 +156,28 @@ public class TestDAO {
             return null;
         }
     }
+ public List<Test> getPublicTest(){
+        DAO dao = new DAO();
+        String sql = "SELECT * FROM test WHERE typeTest = 0 ;";
+        List<Test> listTest = new ArrayList<>();
+        try {
+            ResultSet rs = dao.Query(sql);
+            while(rs.next()){
+                int idTest = rs.getInt("idTest");
+                String nameTest = rs.getString("nameTest");
+                boolean typeTest = rs.getBoolean("typeTest");
+                int time = rs.getInt("time");
+                int idTeacher = rs.getInt("idTeacher");
+                listTest.add(new Test(idTest, nameTest, typeTest, idTeacher, time));
+            }
 
+            return listTest;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public List<Test> getTestByIDSubject(int idSubject){
         DAO dao = new DAO();
         String sql = "SELECT * FROM test WHERE idSubject = ? ;";
@@ -169,10 +190,8 @@ public class TestDAO {
                 boolean typeTest = rs.getBoolean("typeTest");
                 int idTeacher = rs.getInt("idTeacher");
                 int time = rs.getInt("time");
-
                 listTest.add(new Test(idTest, nameTest, typeTest, idTeacher, time));
             }
-
             return listTest;
         } catch (SQLException e) {
             throw new RuntimeException(e);

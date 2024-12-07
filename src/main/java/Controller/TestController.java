@@ -65,7 +65,11 @@ public class TestController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
 
-        if(action.equalsIgnoreCase("getSubject")){
+        if(action.equalsIgnoreCase("getTest")){
+            TestBO tbo = new TestBO();
+            req.getSession().setAttribute("testList", tbo.getPublicTestList());
+            resp.sendRedirect("Student/home.jsp");
+        else if(action.equalsIgnoreCase("getSubject")){
             List<Subject> subjects = tbo.getAllSubject();
             req.setAttribute("subjects", subjects);
         }
@@ -74,6 +78,7 @@ public class TestController extends HttpServlet {
             int idSubject = Integer.parseInt(req.getParameter("idSubject"));
             List<Test> listTest = tbo.getTestByIDSubject(idSubject);
             req.setAttribute("listTest", listTest);
+
         }
     }
 }

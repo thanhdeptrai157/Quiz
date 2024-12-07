@@ -58,7 +58,7 @@
         }
     %>
   ];
-
+  console.log(questionsData.length);
   const displayQuestionDiv = document.querySelector(".displayquestion");
   const questionElement = document.querySelector(".question");
   const answerButtons = document.querySelectorAll(".answer");
@@ -69,7 +69,7 @@
   function loadQuestion() {
     const currentQuestion = questionsData[currentQuestionIndex];
 
-
+    console.log(currentQuestion.question)
     questionElement.textContent = currentQuestion.question;
     answerButtons.forEach((button, index) => {
       num_question.textContent = currentQuestionIndex + 1 + "/" +  questionsData.length;

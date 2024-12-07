@@ -5,9 +5,11 @@ import Model.Bean.Test;
 import Model.Bean.TestTaking;
 import Model.DAO.TestDAO;
 
+import java.util.List;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Random;
+
 
 public class TestBO {
     public void insertTest(Test test){
@@ -21,7 +23,11 @@ public class TestBO {
 
     public Test getTestById(int id){
         TestDAO testDAO = new TestDAO();
-        return testDAO.GetTestById(id);
+        return testDAO.getTestById(id);
+    }
+    public List<Test> getPublicTestList(){
+        TestDAO testDAO = new TestDAO();
+        return testDAO.getPublicTest();
     }
 
     public List<Subject> getAllSubject(){
