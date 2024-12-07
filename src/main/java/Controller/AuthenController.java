@@ -37,19 +37,23 @@ public class AuthenController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         Account account = loginBO.login(username, password);
-        String role = account.getRole();
-        req.getSession().setAttribute("account", account);
-        if(role.equals("admin")){
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        if(account == null){
+            resp.sendRedirect("Login/login.jsp");
         }
-        else if(role.equals("student")){
-            resp.sendRedirect("test?action=getTest");
-        }
-        else if(role.equals("teacher")) {
+        else{
+            String role = account.getRole();
+            req.getSession().setAttribute("account", account);
+            if(role.equals("admin")){
+                req.getRequestDispatcher("Login/login.jsp").forward(req, resp);
+            }
+            else if(role.equals("student")){
+                resp.sendRedirect("test?action=getTest");
+            }
+            else if(role.equals("teacher")) {
 
-            resp.sendRedirect("history?action=listHistoryTest&idTeacher="+account.getId());
+                resp.sendRedirect("history?action=listHistoryTest&idTeacher="+account.getId());
+            }
         }
-
     }
 
     public void SignUp(HttpServletRequest req, HttpServletResponse resp) throws IOException {
