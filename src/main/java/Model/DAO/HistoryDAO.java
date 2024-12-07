@@ -67,7 +67,7 @@ public class HistoryDAO {
             DAO dao = new DAO();
             String sql = "SELECT * FROM test INNER JOIN (SELECT question.idTest, COUNT(question.idQuestion) AS numberOfQuestions FROM `question` GROUP BY idTest) AS count_question\n" +
                     "ON test.idTest = count_question.idTest\n" +
-                    "INNER JOIN (SELECT idTest, COUNT(idStudent) AS numberOfContestants FROM historyTest GROUP BY idTest) AS count_contestant\n" +
+                    "LEFT JOIN (SELECT idTest, COUNT(idStudent) AS numberOfContestants FROM historyTest GROUP BY idTest) AS count_contestant\n" +
                     "ON test.idTest = count_contestant.idTest\n" +
                     "WHERE test.idTeacher = ? ;\n";
             rs = dao.Query(sql, idTeacher);

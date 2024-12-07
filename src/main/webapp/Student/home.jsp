@@ -38,9 +38,9 @@
     <div class="main_content">
         <div class="join" >
             <div class="input_zone">
-                <form action="../test?action=getQuestion" method="post" class="code_input">
+                <form action="../test?action=getIdTestTaking" method="post" class="code_input">
                     <div class="input_container">
-                        <input type="text" placeholder="Nhập mã tham gia" name="idTest">
+                        <input type="text" placeholder="Nhập mã tham gia" name="idTestTaking">
                         <button class="btn_join" type="submit">Tham gia</button>
                     </div>
                 </form>

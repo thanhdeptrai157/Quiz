@@ -36,6 +36,7 @@
 <div class="sidebar">
   <h1>Quản Lý Bài Thi</h1>
   <button><a href="../NewTest/new_test.jsp">Thêm bài thi</a></button>
+  <button><a href="../AddTestTaking/add_test_taking.jsp">Hen gio thi</a></button>
 </div>
 <div class="main">
   <div class="content">
