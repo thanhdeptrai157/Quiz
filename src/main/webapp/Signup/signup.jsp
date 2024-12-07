@@ -9,27 +9,32 @@
 <html>
 <head>
     <title>Signup Form</title>
-    <script>
-        function validateForm() {
-            const password = document.forms["signupForm"]["password"].value;
-            const repassword = document.forms["signupForm"]["repassword"].value;
-
-            if (password !== repassword) {
-                alert("Passwords do not match!");
-                return false;
-            }
-            return true;
-        }
-    </script>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 <form name="signupForm" action="../authen?action=signup" method="post" onsubmit="return validateForm()">
-    Name: <input type="text" name="name" required><br>
-    Username: <input type="text" name="username" required><br>
-    Password: <input type="password" name="password" required><br>
-    Re-enter Password: <input type="password" name="repassword" required><br>
-    Role: <input type="text" name="role" required><br>
-    <button type="submit">OK</button>
+    Name: <input type="text" name="name" required>
+    Username: <input type="text" name="username" required>
+    Password: <input type="password" name="password" required>
+    Re-enter Password: <input type="password" name="repassword" required>
+    Role: <input type="text" name="role" required>
+    <div class="btn">
+        <button type="submit">Sign up</button>
+    </div>
 </form>
 </body>
+<script>
+        function validateForm() {
+        const password = document.forms["signupForm"]["password"].value;
+        const repassword = document.forms["signupForm"]["repassword"].value;
+
+        if (password !== repassword) {
+            alert("Passwords do not match!");
+            return false;
+        }
+            return true;
+        }
+</script>
+</script>
 </html>
