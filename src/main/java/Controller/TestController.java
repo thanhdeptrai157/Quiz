@@ -44,6 +44,7 @@ public class TestController extends HttpServlet {
             req.setAttribute("questions", questions);
             req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
         }
+
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
