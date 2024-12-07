@@ -36,6 +36,7 @@ public class TestController extends HttpServlet {
                         wrongAnswers[1],
                         wrongAnswers[2]));
             }
+            req.getRequestDispatcher("/Teacher/test_manager.jsp").forward(req, resp);
         }
         else if(action.equalsIgnoreCase("getQuestion")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));
@@ -46,20 +47,41 @@ public class TestController extends HttpServlet {
             req.setAttribute("questions", questions);
             req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
         }
+
         else if(action.equalsIgnoreCase("addTestTaking")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));
             String timeStart = req.getParameter("timeStart");
             String timeEnd = req.getParameter("timeEnd");
             boolean set = tbo.AddTestTaking(idTest, timeStart, timeEnd);
 
-            if(set){
-                System.out.println("add thanh cong");
-            }
-            else {
-                System.out.println("add khong thanh cong");
-            }
+            req.getRequestDispatcher("/Teacher/test_manager.jsp").forward(req, resp);
         }
 
+        else if(action.equalsIgnoreCase("getIdTestTaking")){
+            String idTestTaking = req.getParameter("idTestTaking");
+            int idTest = tbo.GetIDTestByIDTestTaking(idTestTaking);
+            System.out.println(idTest);
+            if(idTest != -1){
+                Test test = tbo.getTestById(idTest);
+
+                if(req.getSession().getAttribute("account") == null && test.isTypeTest())
+                    resp.sendRedirect("index.jsp");
+
+                else{
+                    req.setAttribute("test", test);
+                    List<Question> questions = qbo.getAllQuestionByIDTest(idTest);
+                    req.setAttribute("questions", questions);
+                    req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
+
+                }
+            }
+            else{
+                if(req.getSession().getAttribute("account") != null)
+                    req.getRequestDispatcher("/Student/home.jsp").forward(req, resp);
+                else
+                    resp.sendRedirect("index.jsp");
+            }
+        }
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -81,5 +103,6 @@ public class TestController extends HttpServlet {
             req.setAttribute("listTest", listTest);
 
         }
+
     }
 }
