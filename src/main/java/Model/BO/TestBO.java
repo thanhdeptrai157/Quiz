@@ -42,7 +42,14 @@ public class TestBO {
     public boolean AddTestTaking(int idTest, String timeStart, String timeEnd){
         TestDAO testDAO = new TestDAO();
         String id = generateRandomString(10);
-        TestTaking testTaking = new TestTaking(id, idTest, Timestamp.valueOf(timeStart), Timestamp.valueOf(timeEnd));
+
+        String formattedDateTimeStart = timeStart.replace("T", " ") + ":00";
+        Timestamp timestampStart = Timestamp.valueOf(formattedDateTimeStart);
+
+        String formattedDateTimeEnd = timeEnd.replace("T", " ") + ":00";
+        Timestamp timestampEnd = Timestamp.valueOf(formattedDateTimeEnd);
+
+        TestTaking testTaking = new TestTaking(id, idTest, timestampStart, timestampEnd);
         return testDAO.AddTestTaking(testTaking);
     }
 

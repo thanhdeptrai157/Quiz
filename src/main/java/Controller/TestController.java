@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @WebServlet("/test")
@@ -44,6 +45,19 @@ public class TestController extends HttpServlet {
             List<Question> questions = qbo.getAllQuestionByIDTest(idTest);
             req.setAttribute("questions", questions);
             req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
+        }
+        else if(action.equalsIgnoreCase("addTestTaking")){
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            String timeStart = req.getParameter("timeStart");
+            String timeEnd = req.getParameter("timeEnd");
+            boolean set = tbo.AddTestTaking(idTest, timeStart, timeEnd);
+
+            if(set){
+                System.out.println("add thanh cong");
+            }
+            else {
+                System.out.println("add khong thanh cong");
+            }
         }
 
     }
