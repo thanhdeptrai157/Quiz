@@ -2,7 +2,7 @@ package Model.Bean;
 
 import java.sql.Date;
 
-public class History {
+public class HistoryStudent {
     private int idHistory;
     private int idStudent;
     private String nameStudent;
@@ -11,7 +11,7 @@ public class History {
     private int numOfCorrectAnswer;
     private Date timeFinish;
 
-    public History(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Date timeFinish) {
+    public HistoryStudent(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Date timeFinish) {
         this.idHistory = idHistory;
         this.idStudent = idStudent;
         this.nameStudent = nameStudent;

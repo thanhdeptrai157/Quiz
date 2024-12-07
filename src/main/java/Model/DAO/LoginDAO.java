@@ -5,14 +5,17 @@ import Model.Bean.Account;
 import java.sql.ResultSet;
 
 public class LoginDAO {
-    public String CheckLogin(String username, String password) {
+    public Account CheckLogin(String username, String password) {
 
         ResultSet rs = null;
         try {
             DAO dao = new DAO();
             rs = dao.Query("SELECT * FROM account WHERE username = ? AND password = ? ;", username, password);
             if (rs.next()) {
-                return rs.getString("role");
+                int idAccount = rs.getInt("idAccount");
+                String name = rs.getString("name");
+                String role = rs.getString("role");
+                return new Account(idAccount, name, role);
             }
         } catch (Exception e) {
             e.printStackTrace();

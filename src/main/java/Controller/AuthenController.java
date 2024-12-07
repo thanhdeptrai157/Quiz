@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.BO.LoginBO;
+import Model.Bean.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,7 +35,8 @@ public class AuthenController extends HttpServlet {
         String password = req.getParameter("password");
         System.out.println(username);
         System.out.println(password);
-        String role = loginBO.login(username, password);
+        Account account = loginBO.login(username, password);
+        String role = account.getRole();
         if(role.equals("admin")){
             System.out.println("admin");
             req.getSession().setAttribute("role", role);
