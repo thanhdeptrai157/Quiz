@@ -1,6 +1,8 @@
 <%@ page import="Model.Bean.Account" %>
 <%@ page import="Model.Bean.Test" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Bean.Subject" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: CONG THANH
   Date: 12/7/2024
@@ -31,6 +33,8 @@
     <div>
         <span> <%= account != null ? account.getName() : ""%></span>
         <a href="../authen?action=logout">Đăng xuất</a>
+
+        <a href="../history?action=listHistoryStudentByIDStudent&idStudent=<%=account.getId()%>">History</a>
     </div>
 </header>
 
@@ -55,12 +59,40 @@
             <div class="test_list">
 
             </div>
+
+            <%
+                int index = 0;
+                Map<Subject, List<Test>> mapTestHeader = (Map<Subject, List<Test>>) request.getSession().getAttribute("mapTest");
+                for(Subject subject : mapTestHeader.keySet()){
+            %>
+                <h2><%=subject.getNameSubject()%></h2>
+                <div class="test_list">
+                    <%for(Test test : mapTestHeader.get(subject)){%>
+
+                        <div class="test_card">
+                            <h3><%=test.getNameTest()%></h3>
+                            <p><strong>ID:</strong><%=test.getIdTest()%></p>
+                            <p><strong>Giáo viên:</strong><%=test.getIdTeacher()%></p>
+                            <p><strong>Thời gian:</strong><%=test.getTime()%> phút </p>
+                            <form action="../test?action=getQuestion" method="post">
+                                <input type="hidden" name="idTest" value="<%=test.getIdTest()%>">
+                                <button type="submit" class="btn_start">Bắt đầu</button>
+                            </form>
+                        </div>
+
+                    <%}%>
+                </div>
+            <%
+                index++;
+                }
+            %>
         </div>
     </div>
 </section>
 </body>
 
 <script>
+
     var testList = [
         <%
             List<Test> tests = (List<Test>) request.getSession().getAttribute("testList");
