@@ -2,6 +2,7 @@ package Controller;
 
 import Model.BO.QuestionBO;
 import Model.BO.TestBO;
+import Model.Bean.Account;
 import Model.Bean.Question;
 import Model.Bean.Subject;
 import Model.Bean.Test;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -26,7 +28,13 @@ public class TestController extends HttpServlet {
         if(action.equalsIgnoreCase("add")){
             String [] questions = req.getParameterValues("question");
             String nameTest = req.getParameter("nameTest");
-            tbo.insertTest(new Test(nameTest, false, 2, 20 ));
+            int idSubject = Integer.parseInt(req.getParameter("idSubject"));
+            int timeTest = Integer.parseInt(req.getParameter("timeTest"));
+            boolean typeTest = Integer.parseInt(req.getParameter("option")) == 1;
+            int idTeacher = ((Account)req.getSession().getAttribute("account")).getId();
+            System.out.println(nameTest+ " " + typeTest+" "+ timeTest);
+            tbo.insertTest(new Test(nameTest, idSubject, typeTest, 2, timeTest ));
+
             int idTest = tbo.getMaxIdTest();
             for(int i = 0; i < questions.length; i++){
                 String trueAnswer = req.getParameter("answer_"+(i+1)+"_correct");
@@ -36,7 +44,9 @@ public class TestController extends HttpServlet {
                         wrongAnswers[1],
                         wrongAnswers[2]));
             }
-            req.getRequestDispatcher("/Teacher/test_manager.jsp").forward(req, resp);
+            System.out.println(idSubject);
+            System.out.println("ok");
+            resp.sendRedirect("history?action=listHistoryTest&idTeacher="+idTeacher);
         }
         else if(action.equalsIgnoreCase("getQuestion")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));
@@ -94,7 +104,8 @@ public class TestController extends HttpServlet {
         }
         else if(action.equalsIgnoreCase("getSubject")){
             List<Subject> subjects = tbo.getAllSubject();
-            req.setAttribute("subjects", subjects);
+            req.setAttribute("listSubject", subjects);
+            req.getRequestDispatcher("NewTest/new_test.jsp").forward(req, resp);
         }
         else if(action.equalsIgnoreCase("getTestByIdSubject")){
             int idSubject = Integer.parseInt(req.getParameter("idSubject"));

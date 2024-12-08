@@ -3,9 +3,18 @@ package Model.Bean;
 public class Test {
     private int idTest;
     private String nameTest;
+    private int idSubject;
     private boolean typeTest;
     private int idTeacher;
     private int time;
+
+    public Test(String nameTest,int idSubject, boolean typeTest, int idTeacher, int time) {
+        this.nameTest = nameTest;
+        this.idSubject = idSubject;
+        this.typeTest = typeTest;
+        this.idTeacher = idTeacher;
+        this.time = time;
+    }
 
     public Test(int idTest, String nameTest, boolean typeTest, int idTeacher, int time) {
         this.idTest = idTest;
@@ -19,6 +28,14 @@ public class Test {
         this.typeTest = typeTest;
         this.idTeacher = idTeacher;
         this.time = time;
+    }
+
+    public int getIdSubject() {
+        return idSubject;
+    }
+
+    public void setIdSubject(int idSubject) {
+        this.idSubject = idSubject;
     }
 
     public int getIdTest() {

@@ -166,3 +166,59 @@ a:hover {
 .content::-webkit-scrollbar-thumb:hover {
     background: #2980b9;
 }
+.history-button {
+    padding: 10px 15px;
+    background-color: #127713;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+    margin-right: 10px;
+}
+form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    box-sizing: border-box;
+}
+
+form input[type="text"],
+form input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+form button {
+    width: 48%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+title {
+    text-align: center;
+}
+.history-button:hover {
+    background-color: #199a1a;
+}
+
+.history-button a {
+    color: white;
+    font-weight: bold;
+}

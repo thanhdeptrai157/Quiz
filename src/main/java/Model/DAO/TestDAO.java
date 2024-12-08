@@ -15,8 +15,8 @@ public class TestDAO {
     public void insertTest(Test test) {
         try{
             DAO dao = new DAO();
-            String sql = "INSERT INTO test(nameTest, typeTest, idTeacher, time) VALUES(?,?,?,?)";
-            dao.Update(sql, test.getNameTest(), test.isTypeTest(), test.getIdTeacher(), test.getTime());
+            String sql = "INSERT INTO test(nameTest, idSubject, typeTest, idTeacher, time) VALUES(?,?,?,?,?)";
+            dao.Update(sql, test.getNameTest(), test.getIdSubject(), test.isTypeTest(), test.getIdTeacher(), test.getTime());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
