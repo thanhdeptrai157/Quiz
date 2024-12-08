@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,10 @@ public class HistoryController extends HttpServlet {
         }
         else if(action.equals("getHistoryStudent")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));
+            System.out.println("idTest: "+ idTest);
             List<HistoryStudent> listHistoryStudent = historyBO.GetHistoryStudent(idTest);
+            req.setAttribute("listHistoryStudent", listHistoryStudent);
+            req.getRequestDispatcher("Teacher/history_student.jsp").forward(req, resp);
         }
         else if(action.equals("addHistoryStudent")){
             int idStudent = Integer.parseInt(req.getParameter("idStudent"));
@@ -39,7 +43,7 @@ public class HistoryController extends HttpServlet {
             int idTest = Integer.parseInt(req.getParameter("idTest"));
             int numberOfQuestion = Integer.parseInt(req.getParameter("numberOfQuestion"));
             int numberOfCorrectAnswer = Integer.parseInt(req.getParameter("numberOfCorrectAnswer"));
-            Date date = Date.valueOf(req.getParameter("date"));
+            Timestamp date = new Timestamp(System.currentTimeMillis());
 
             HistoryStudent historyStudent = new HistoryStudent(1, idStudent, nameStudent, idTest, numberOfQuestion, numberOfCorrectAnswer, date);
             historyBO.AddHistory(historyStudent);

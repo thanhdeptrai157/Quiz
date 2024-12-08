@@ -53,6 +53,7 @@
             HistoryTest t = tests.get(i);
     %>
     {
+      idTest:"<%=t.getIdTest()%>",
       nameTest: "<%=t.getNameTest()%>",
       numContestants: "<%=t.getNumberOfContestants()%>",
       numQuestions: "<%=t.getNumberOfQuestions()%>",
@@ -80,6 +81,15 @@
     var numContestants = document.createElement('p');
     numContestants.textContent = "Số Người Tham Gia: "+ test.numContestants;
     card.appendChild(numContestants);
+
+    var buttonHistory = document.createElement('button');
+    var link = document.createElement('a');
+    link.textContent = "historyStudent " + test.idTest;
+    link.href = "../history?action=getHistoryStudent&idTest=" + test.idTest; // Đường dẫn đến trang lịch sử
+    link.style.textDecoration = "none"; // Để loại bỏ gạch chân
+    link.style.color = "inherit"; // Để đồng bộ màu với button
+    buttonHistory.appendChild(link);
+    card.appendChild(buttonHistory);
 
     contentDiv.appendChild(card);
   });
