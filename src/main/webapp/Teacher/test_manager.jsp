@@ -80,6 +80,8 @@
     numContestants.textContent = "Số Người Tham Gia: "+ test.numContestants;
     card.appendChild(numContestants);
 
+    var link = document.createElement('a');
+    link.href = ""
     contentDiv.appendChild(card);
   });
 
