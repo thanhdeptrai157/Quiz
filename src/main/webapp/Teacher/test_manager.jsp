@@ -85,7 +85,8 @@
       idTest: "<%= t.getIdTest() %>",
       nameTest: "<%= t.getNameTest() %>",
       numContestants: "<%= t.getNumberOfContestants() %>",
-      numQuestions: "<%= t.getNumberOfQuestions() %>"
+      numQuestions: "<%= t.getNumberOfQuestions() %>",
+      code: "<%=t.getCode()%>"
     }<%= i < tests.size() - 1 ? "," : "" %>
     <%
         }
@@ -109,7 +110,11 @@
     var numContestants = document.createElement('p');
     numContestants.textContent = "Số Người Tham Gia: " + test.numContestants;
     card.appendChild(numContestants);
-
+    if(!test.code !== "null"){
+      var codeTest = document.createElement('p');
+      codeTest.textContent = "Code: " + test.code;
+      card.appendChild(codeTest);
+    }
     var buttonHistory = document.createElement('button');
     buttonHistory.className = "history-button";
     var link = document.createElement('a');

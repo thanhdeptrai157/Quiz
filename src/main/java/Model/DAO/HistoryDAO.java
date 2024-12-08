@@ -101,6 +101,7 @@ public class HistoryDAO {
                     "ON test.idTest = count_question.idTest\n" +
                     "LEFT JOIN (SELECT idTest, COUNT(idStudent) AS numberOfContestants FROM historyTest GROUP BY idTest) AS count_contestant\n" +
                     "ON test.idTest = count_contestant.idTest\n" +
+                    "LEFT JOIN testtaking ON testtaking.idTest = test.idTest\n"+
                     "WHERE test.idTeacher = ? ;\n";
             rs = dao.Query(sql, idTeacher);
             while (rs.next()) {
@@ -108,7 +109,8 @@ public class HistoryDAO {
                 String nameTest = rs.getString("nameTest");
                 int numberOfQuestions = rs.getInt("numberOfQuestions");
                 int numberOfContestants = rs.getInt("numberOfContestants");
-                HistoryTest historyTest = new HistoryTest(idTest, nameTest, numberOfQuestions, numberOfContestants);
+                String code = rs.getString("id");
+                HistoryTest historyTest = new HistoryTest(idTest, nameTest, numberOfQuestions, numberOfContestants, code);
                 listHistoryTest.add(historyTest);
             }
 

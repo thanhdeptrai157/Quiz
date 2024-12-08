@@ -47,7 +47,7 @@ public class TestBO {
         return testDAO.getIdTestByIDTestTaking(TestTaking);
     }
 
-    public boolean AddTestTaking(int idTest, String timeStart, String timeEnd){
+    public String AddTestTaking(int idTest, String timeStart, String timeEnd){
         TestDAO testDAO = new TestDAO();
         String id = generateRandomString(10);
 
@@ -58,7 +58,10 @@ public class TestBO {
         Timestamp timestampEnd = Timestamp.valueOf(formattedDateTimeEnd);
 
         TestTaking testTaking = new TestTaking(id, idTest, timestampStart, timestampEnd);
-        return testDAO.AddTestTaking(testTaking);
+         if(testDAO.AddTestTaking(testTaking)){
+             return id;
+         }
+         return null;
     }
 
     public static String generateRandomString(int length) {
@@ -73,12 +76,9 @@ public class TestBO {
         return result.toString();
     }
 
-    public void updateTest(Test test, List<Integer> listIdQuestion, List<Question> listQuestion){
+    public void updateTest(Test test){
         TestDAO testDAO = new TestDAO();
-        QuestionDAO questionDAO = new QuestionDAO();
         testDAO.updateTest(test);
-        for(int idQuestion : listIdQuestion){ questionDAO.deleteQuestion(idQuestion); }
-        for(Question question : listQuestion){ questionDAO.insertQuestion(question); }
     }
 
 }

@@ -53,30 +53,33 @@ public class TestController extends HttpServlet {
         }
         else if(action.equalsIgnoreCase("edit")){
             String [] ids = ((String) req.getParameter("inputQuestions")).split(" ");
+
             for(String id : ids){
-                System.out.println(id);
+                int idTest = Integer.parseInt(id);
+                qbo.deleteQuestion(idTest);
             }
-//            String [] questions = req.getParameterValues("question");
-//            String nameTest = req.getParameter("nameTest");
-//            int idSubject = Integer.parseInt(req.getParameter("idSubject"));
-//            int timeTest = Integer.parseInt(req.getParameter("timeTest"));
-//            boolean typeTest = Integer.parseInt(req.getParameter("option")) == 1;
-//            int idTeacher = ((Account)req.getSession().getAttribute("account")).getId();
-//            System.out.println(nameTest+ " " + typeTest+" "+ timeTest);
-//            tbo.insertTest(new Test(nameTest, idSubject, typeTest, 2, timeTest ));
-//
-//            int idTest = tbo.getMaxIdTest();
-//            for(int i = 0; i < questions.length; i++){
-//                String trueAnswer = req.getParameter("answer_"+(i+1)+"_correct");
-//                String [] wrongAnswers = req.getParameterValues("answer_"+(i+1)+"_incorrect");
-//                qbo.insertQuestion(new Question(idTest, questions[i], trueAnswer,
-//                        wrongAnswers[0],
-//                        wrongAnswers[1],
-//                        wrongAnswers[2]));
-//            }
-//            System.out.println(idSubject);
-//            System.out.println("ok");
-//            resp.sendRedirect("history?action=listHistoryTest&idTeacher="+idTeacher);
+
+            String [] questions = req.getParameterValues("question");
+            String nameTest = req.getParameter("nameTest");
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            int idSubject = Integer.parseInt(req.getParameter("idSubject"));
+            int timeTest = Integer.parseInt(req.getParameter("timeTest"));
+            boolean typeTest = Integer.parseInt(req.getParameter("option")) == 1;
+            int idTeacher = ((Account)req.getSession().getAttribute("account")).getId();
+            System.out.println(nameTest+ " " + typeTest+" "+ timeTest  + " "+ idSubject);
+            tbo.updateTest(new Test(idTest, idSubject, nameTest, typeTest, idTeacher, timeTest ));
+
+            for(int i = 0; i < questions.length; i++){
+                String trueAnswer = req.getParameter("answer_"+(i+1)+"_correct");
+                String [] wrongAnswers = req.getParameterValues("answer_"+(i+1)+"_incorrect");
+                qbo.insertQuestion(new Question(idTest, questions[i], trueAnswer,
+                        wrongAnswers[0],
+                        wrongAnswers[1],
+                        wrongAnswers[2]));
+            }
+            System.out.println(idSubject);
+            System.out.println("ok");
+            resp.sendRedirect("history?action=listHistoryTest&idTeacher="+idTeacher);
         }
         else if(action.equalsIgnoreCase("getQuestion")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));
@@ -93,9 +96,14 @@ public class TestController extends HttpServlet {
             int idTest = Integer.parseInt(req.getParameter("idTest"));
             String timeStart = req.getParameter("timeStart");
             String timeEnd = req.getParameter("timeEnd");
-            boolean set = tbo.AddTestTaking(idTest, timeStart, timeEnd);
-
-            req.getRequestDispatcher("/Teacher/test_manager.jsp").forward(req, resp);
+            String code = tbo.AddTestTaking(idTest, timeStart, timeEnd);
+            if(code != null){
+                req.setAttribute("code", code);
+                req.getRequestDispatcher("/Teacher/code.jsp").forward(req, resp);
+            }
+            else{
+                System.out.println("Tao code that bai");
+            }
         }
 
         else if(action.equalsIgnoreCase("getIdTestTaking")){
@@ -117,7 +125,7 @@ public class TestController extends HttpServlet {
             }
             else{
                 if(req.getSession().getAttribute("account") != null)
-                    req.getRequestDispatcher("/Student/home.jsp").forward(req, resp);
+                    resp.sendRedirect("Student/home.jsp");
                 else
                     resp.sendRedirect("index.jsp");
             }

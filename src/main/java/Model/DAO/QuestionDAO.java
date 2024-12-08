@@ -50,7 +50,7 @@ public class QuestionDAO {
     public boolean deleteQuestion(int idQuestion){
         try{
             DAO dao = new DAO();
-            String sql = "DELETE FROM question WHERE idTest = ? ;";
+            String sql = "DELETE FROM question WHERE idQuestion = ? ;";
             int count = dao.Update(sql, idQuestion);
             if(count > 0) return true;
         } catch (SQLException e) {
