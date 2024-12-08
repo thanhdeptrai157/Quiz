@@ -15,7 +15,14 @@ public class Test {
         this.idTeacher = idTeacher;
         this.time = time;
     }
-
+    public Test(int idTest, int idSubject, String nameTest, boolean typeTest, int idTeacher, int time) {
+        this.idTest = idTest;
+        this.nameTest = nameTest;
+        this.typeTest = typeTest;
+        this.idTeacher = idTeacher;
+        this.time = time;
+        this.idSubject = idSubject;
+    }
     public Test(int idTest, String nameTest, boolean typeTest, int idTeacher, int time) {
         this.idTest = idTest;
         this.nameTest = nameTest;

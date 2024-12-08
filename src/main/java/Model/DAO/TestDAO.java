@@ -49,9 +49,10 @@ public class TestDAO {
             String nameTest = rs.getString("nameTest");
             boolean typeTest = rs.getBoolean("typeTest");
             int idTeacher = rs.getInt("idTeacher");
+            int idSubject = rs.getInt("idSubject");
             int time = rs.getInt("time");
 
-            Test test = new Test(idTest, nameTest, typeTest, idTeacher, time);
+            Test test = new Test(idTest, idSubject,  nameTest, typeTest, idTeacher, time);
 
             return test;
         } catch (SQLException e) {

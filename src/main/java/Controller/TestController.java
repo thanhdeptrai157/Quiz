@@ -51,6 +51,33 @@ public class TestController extends HttpServlet {
             System.out.println("ok");
             resp.sendRedirect("history?action=listHistoryTest&idTeacher="+idTeacher);
         }
+        else if(action.equalsIgnoreCase("edit")){
+            String [] ids = ((String) req.getParameter("inputQuestions")).split(" ");
+            for(String id : ids){
+                System.out.println(id);
+            }
+//            String [] questions = req.getParameterValues("question");
+//            String nameTest = req.getParameter("nameTest");
+//            int idSubject = Integer.parseInt(req.getParameter("idSubject"));
+//            int timeTest = Integer.parseInt(req.getParameter("timeTest"));
+//            boolean typeTest = Integer.parseInt(req.getParameter("option")) == 1;
+//            int idTeacher = ((Account)req.getSession().getAttribute("account")).getId();
+//            System.out.println(nameTest+ " " + typeTest+" "+ timeTest);
+//            tbo.insertTest(new Test(nameTest, idSubject, typeTest, 2, timeTest ));
+//
+//            int idTest = tbo.getMaxIdTest();
+//            for(int i = 0; i < questions.length; i++){
+//                String trueAnswer = req.getParameter("answer_"+(i+1)+"_correct");
+//                String [] wrongAnswers = req.getParameterValues("answer_"+(i+1)+"_incorrect");
+//                qbo.insertQuestion(new Question(idTest, questions[i], trueAnswer,
+//                        wrongAnswers[0],
+//                        wrongAnswers[1],
+//                        wrongAnswers[2]));
+//            }
+//            System.out.println(idSubject);
+//            System.out.println("ok");
+//            resp.sendRedirect("history?action=listHistoryTest&idTeacher="+idTeacher);
+        }
         else if(action.equalsIgnoreCase("getQuestion")){
             int idTest = Integer.parseInt(req.getParameter("idTest"));
             System.out.println(idTest);
@@ -86,7 +113,6 @@ public class TestController extends HttpServlet {
                     List<Question> questions = qbo.getAllQuestionByIDTest(idTest);
                     req.setAttribute("questions", questions);
                     req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
-
                 }
             }
             else{
@@ -104,7 +130,6 @@ public class TestController extends HttpServlet {
         if(action.equalsIgnoreCase("getTest")) {
             TestBO tbo = new TestBO();
             req.getSession().setAttribute("testList", tbo.getPublicTestList());
-
             List<Subject> listSubject = tbo.getAllSubject();
             Map<Subject, List<Test>> mapTest = new HashMap<>();
 
@@ -116,6 +141,16 @@ public class TestController extends HttpServlet {
             req.getSession().setAttribute("mapTest", mapTest);
 
             resp.sendRedirect("Student/home.jsp");
+        }else if(action.equalsIgnoreCase("getTestEdit")){
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            Test test = tbo.getTestById(idTest);
+            req.setAttribute("test", test);
+            List<Question> questions = qbo.getAllQuestionByIDTest(idTest);
+            req.setAttribute("questions", questions);
+            List<Subject> subjects = tbo.getAllSubject();
+            req.setAttribute("listSubject", subjects);
+            req.getRequestDispatcher("/NewTest/new_test.jsp").forward(req, resp);
+
         }
         else if(action.equalsIgnoreCase("getSubject")){
             List<Subject> subjects = tbo.getAllSubject();
@@ -126,8 +161,6 @@ public class TestController extends HttpServlet {
             int idSubject = Integer.parseInt(req.getParameter("idSubject"));
             List<Test> listTest = tbo.getTestByIDSubject(idSubject);
             req.setAttribute("listTest", listTest);
-
         }
-
     }
 }

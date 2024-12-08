@@ -126,6 +126,16 @@
     buttonAdd.className = "history-button"
     card.appendChild(buttonAdd);
 
+    var buttonEdit = document.createElement('button');
+    buttonEdit.className = "history-button";
+    var linkedit = document.createElement('a');
+    linkedit.textContent = "Sửa bài thi";
+    linkedit.href = "../test?action=getTestEdit&idTest=" + test.idTest;
+    linkedit.style.textDecoration = "none";
+    linkedit.style.color = "inherit";
+    buttonEdit.appendChild(linkedit);
+    card.appendChild(buttonEdit);
+
     contentDiv.appendChild(card);
   });
 

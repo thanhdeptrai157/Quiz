@@ -1,5 +1,7 @@
 <%@ page import="Model.Bean.Subject" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Model.Bean.Question" %>
+<%@ page import="Model.Bean.Test" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,34 +13,43 @@
 <div>
     <button class="back" onclick="history.back()">Quay lại</button>
 </div>
+<%
+    List<Question> questions = (List<Question>) request.getAttribute("questions");
+    Test test = (Test) request.getAttribute("test");
+    String action = questions != null? "edit" : "add";
+%>
 <div class="main">
-    <form action="test?action=add" method="post">
+    <form action="test?action=<%=action%>" method="post">
 
         <div class="infor_test">
             <label for="nameTest">Tên bài test:</label>
-            <input type="text" name="nameTest" id="nameTest" required><br>
+            <input type="text" name="nameTest" id="nameTest" value="<%=test !=null? test.getNameTest() : ""%>" required><br>
             <div class="test_details">
                 <div>
                     <label for="timeTest">Thời gian (phút):</label>
-                    <input type="number" name="timeTest" id="timeTest" required>
+                    <input type="number" name="timeTest" id="timeTest" value="<%=test != null? test.getTime() : ""%>" required>
                 </div>
 
                 <div>
                     <label for="option">Kiểu test:</label>
                     <select name="option" id="option">
-                        <option value="0">Công khai</option>
-                        <option value="1">Đóng</option>
+                        <option value="0" <%= !test.isTypeTest() ? "selected" : ""%>>Công khai</option>
+                        <option value="1" <%= test.isTypeTest() ? "selected" : ""%>>Đóng</option>
                     </select>
                 </div>
 
             </div>
             <div>
-                <select name="idSubject">
+                <select name="idSubject" >
                     <%
                         List<Subject> listSubject = (List<Subject>) request.getAttribute("listSubject");
+                        System.out.println(test.getIdSubject());
                         for(Subject subject : listSubject){
-                    %>
-                    <option value="<%=subject.getIdSubject()%>"><%=subject.getNameSubject()%></option>
+                            assert test != null;%>
+                    <option value="<%=subject.getIdSubject()%>"
+                            <%=subject.getIdSubject() == (test.getIdSubject()) ? "selected" : ""%>>
+                        <%=subject.getNameSubject()%>
+                    </option>
                     <%}%>
 
                 </select>
@@ -51,9 +62,43 @@
 
         <div class="list_question">
             <div class="header">
-                <span>0 câu hỏi</span>
+                <span><%=questions != null ? questions.size() : "0"%> câu hỏi</span>
             </div>
+            <%
+                if(questions != null){
+                    for(int i = 0; i<questions.size(); ++i){
+                            Question question = questions.get(i);
+                        %>
+            <div style="margin-bottom: 20px;">
+                <div style="display: flex;">
+                    <span class="num"><%=i + 1%></span>
+                    <h4>. <%=question.getQuestion()%></h4>
+                </div>
+                <ul>
+                    <li style="font-weight: bold; color: green;">1. <%=question.getAnswer1()%></li>
+                    <li>2. <%=question.getAnswer2()%></li>
+                    <li>3. <%=question.getAnswer3()%></li>
+                    <li>4. <%=question.getAnswer4()%></li>
+                </ul>
+                <input type="hidden" name="idQuestion" value="<%=question.getIdQuestion()%>" class="idQuestion"/>
+                <div class="postInput">
+                    <input type="hidden" name="question" value="<%=question.getQuestion()%>">
+                    <input type="hidden" name="<%="answer_"+i+"_correct"%>" value="<%=question.getAnswer1()%>">
+                    <input type="hidden" name="<%="answer_"+i+"_incorrect"%>" value="<%=question.getAnswer2()%>">
+                    <input type="hidden" name="<%="answer_"+i+"_incorrect"%>" value="<%=question.getAnswer3()%>">
+                    <input type="hidden" name="<%="answer_"+i+"_incorrect"%>" value="<%=question.getAnswer4()%>">
+                </div>
+                <div class="button_container">
+                    <button type="button" class="btn_edit">Sửa</button>
+                    <button type="button" class="btn_delete">Xoá</button>
+                </div>
+            </div>
+            <%
+                    }
+                }
+            %>
         </div>
+        <input type="hidden" class="inputQuestions" name="inputQuestions">
     </form>
 </div>
 
