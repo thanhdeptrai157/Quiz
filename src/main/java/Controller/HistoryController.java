@@ -48,8 +48,18 @@ public class HistoryController extends HttpServlet {
             resp.sendRedirect("Teacher/test_manager.jsp");
         } else if (action.equals("getHistoryStudent")) {
             int idTest = Integer.parseInt(req.getParameter("idTest"));
+            System.out.println("idTest: "+ idTest);
             List<HistoryStudent> listHistoryStudent = historyBO.GetHistoryStudent(idTest);
+            req.setAttribute("listHistoryStudent", listHistoryStudent);
+            req.getRequestDispatcher("Teacher/history_student.jsp").forward(req, resp);
         }
-
+        else if(action.equals("addHistoryStudent")){
+            int idStudent = Integer.parseInt(req.getParameter("idStudent"));
+            String nameStudent = req.getParameter("nameStudent");
+            int idTest = Integer.parseInt(req.getParameter("idTest"));
+            int numberOfQuestion = Integer.parseInt(req.getParameter("numberOfQuestion"));
+            int numberOfCorrectAnswer = Integer.parseInt(req.getParameter("numberOfCorrectAnswer"));
+            Timestamp date = new Timestamp(System.currentTimeMillis());
+        }
     }
 }
