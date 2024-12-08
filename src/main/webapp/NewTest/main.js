@@ -13,7 +13,22 @@ const answersInputs = [
 ];
 const correctAnswerSelect = document.getElementById("correct_answer");
 
-let questionCount = 0;
+let questionCount = parseInt(headerText.textContent.split(" ")[0]);
+
+const delete_Button = document.querySelectorAll(".btn_delete");
+const edit_Button = document.querySelectorAll(".btn_edit");
+
+delete_Button.forEach(btn =>{
+    btn.addEventListener("click",
+        ()=> deleteQuestion(btn.parentElement.parentElement, questionCount, headerText)
+    )
+})
+const id_question = document.querySelectorAll(".idQuestion");
+const id_questions = document.querySelector(".inputQuestions");
+
+id_question.forEach( (id)=>{
+    id_questions.value += id.value + " ";
+})
 
 btnAdd.addEventListener("click", () => {
     popup.style.display = "flex";
@@ -155,12 +170,9 @@ function addQuestion() {
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
         deleteButton.textContent = "Xoá";
-        deleteButton.addEventListener("click", () => {
-            questionDiv.remove();
-            questionCount--;
-            headerText.textContent = `${questionCount} câu hỏi`;
-            reNumber();
-        });
+        deleteButton.addEventListener("click",
+            ()=>deleteQuestion(questionDiv,questionCount, headerText)
+        )
         buttonContainer.appendChild(deleteButton);
 
         questionDiv.appendChild(buttonContainer);
@@ -171,6 +183,14 @@ function addQuestion() {
     }
 }
 
+
+function deleteQuestion(questionDiv){
+    questionDiv.remove();
+    questionCount--;
+    console.log(questionCount);
+    headerText.textContent = `${questionCount} câu hỏi`;
+    reNumber();
+}
 function resetPopup() {
     questionInput.value = "";
     answersInputs.forEach(input => input.value = "");
@@ -184,5 +204,27 @@ function reNumber() {
         n.textContent = index + 1;
     });
 }
+edit_Button.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const questionDiv = btn.parentElement.parentElement;
+        console.log(questionDiv);
+        const questionTitle = questionDiv.querySelector("h4");
+        const answerList = questionDiv.querySelector("ul").children;
+
+        const questionText = questionTitle.textContent.slice(2).trim();
+        const answersText = Array.from(answerList).map(li => li.textContent.slice(3).trim());
+        const correctIndex = Array.from(answerList).findIndex(li => li.style.fontWeight === "bold") + 1;
+
+        questionInput.value = questionText;
+        answersInputs.forEach((input, i) => input.value = answersText[i]);
+        correctAnswerSelect.value = correctIndex;
+
+        popup.style.display = "flex";
+        isEditing = true;
+        currentEditingQuestion = questionDiv;
+
+        addQuestionBtn.textContent = "Cập nhật câu hỏi";
+    });
+});
 
 addQuestionBtn.onclick = addQuestion;
