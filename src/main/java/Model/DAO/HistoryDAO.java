@@ -68,6 +68,7 @@ public class HistoryDAO {
             DAO dao = new DAO();
             String sql = "SELECT * FROM historyTest \n" +
                     "INNER JOIN account ON account.idAccount = historyTest.idStudent\n" +
+                    "INNER JOIN test ON test.idTest = historyTest.idTest\n" +
                     "WHERE idStudent = ?;";
             rs = dao.Query(sql, idStuident);
             while (rs.next()) {
@@ -75,10 +76,11 @@ public class HistoryDAO {
                 int idHistory = rs.getInt("idHistory");
                 int idStudent = rs.getInt("idStudent");
                 String nameStudent = rs.getString("name");
+                String nameTest = rs.getString("nameTest");
                 int numOfQuestion = rs.getInt("numberOfQuestion");
                 int numOfCorrectAnswer = rs.getInt("numberOfCorrectAnswer");
                 Timestamp timeFinish = rs.getTimestamp("timeFinish");
-                HistoryStudent historyStudent = new HistoryStudent(idHistory, idStudent, nameStudent, idTest, numOfQuestion, numOfCorrectAnswer, timeFinish);
+                HistoryStudent historyStudent = new HistoryStudent(idHistory, idStudent, nameStudent, nameTest, idTest, numOfQuestion, numOfCorrectAnswer, timeFinish);
                 listHistoryStudent.add(historyStudent);
             }
 

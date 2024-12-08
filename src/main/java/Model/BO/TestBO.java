@@ -1,8 +1,10 @@
 package Model.BO;
 
+import Model.Bean.Question;
 import Model.Bean.Subject;
 import Model.Bean.Test;
 import Model.Bean.TestTaking;
+import Model.DAO.QuestionDAO;
 import Model.DAO.TestDAO;
 
 import java.util.List;
@@ -69,6 +71,14 @@ public class TestBO {
             result.append(characters.charAt(index));
         }
         return result.toString();
+    }
+
+    public void updateTest(Test test, List<Integer> listIdQuestion, List<Question> listQuestion){
+        TestDAO testDAO = new TestDAO();
+        QuestionDAO questionDAO = new QuestionDAO();
+        testDAO.updateTest(test);
+        for(int idQuestion : listIdQuestion){ questionDAO.deleteQuestion(idQuestion); }
+        for(Question question : listQuestion){ questionDAO.insertQuestion(question); }
     }
 
 }

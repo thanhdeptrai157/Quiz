@@ -8,9 +8,21 @@ public class HistoryStudent {
     private int idStudent;
     private String nameStudent;
     private int idTest;
+    private String nameTest;
     private int numOfQuestion;
     private int numOfCorrectAnswer;
     private Timestamp timeFinish;
+
+    public HistoryStudent(int idHistory, int idStudent, String nameStudent, String nameTest, int idTest, int numOfQuestion, int numOfCorrectAnswer, Timestamp timeFinish) {
+        this.idHistory = idHistory;
+        this.idStudent = idStudent;
+        this.nameStudent = nameStudent;
+        this.idTest = idTest;
+        this.nameTest = nameTest;
+        this.numOfQuestion = numOfQuestion;
+        this.numOfCorrectAnswer = numOfCorrectAnswer;
+        this.timeFinish = timeFinish;
+    }
 
     public HistoryStudent(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Timestamp timeFinish) {
         this.idHistory = idHistory;
@@ -76,5 +88,13 @@ public class HistoryStudent {
 
     public void setNameStudent(String nameStudent) {
         this.nameStudent = nameStudent;
+    }
+
+    public String getNameTest() {
+        return nameTest;
+    }
+
+    public void setNameTest(String nameTest) {
+        this.nameTest = nameTest;
     }
 }

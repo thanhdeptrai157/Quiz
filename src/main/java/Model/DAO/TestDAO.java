@@ -199,4 +199,34 @@ public class TestDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean deleteTest(int idTest){
+        try{
+            DAO dao = new DAO();
+            String sql = "DELETE FROM test WHERE idTest = ? ;";
+            int count = dao.Update(sql, idTest);
+            if(count > 0) return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    public boolean updateTest(Test test){
+        try{
+            DAO dao = new DAO();
+            String sql = "UPDATE test SET nameTest = ?, idSubject = ?, typeTest = ?, idTeacher = ?, time = ? WHERE idTest = ? ;";
+            int count = dao.Update(sql,
+                    test.getNameTest(),
+                    test.getIdSubject(),
+                    test.isTypeTest(),
+                    test.getIdTeacher(),
+                    test.getTime(),
+                    test.getIdTest());
+            if(count > 0) return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

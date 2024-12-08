@@ -72,7 +72,8 @@
     %>
     <div class="history-item">
         <p><strong>Name:</strong> <%=historyStudent.getNameStudent()%></p>
-        <p><strong>ID:</strong> <%=historyStudent.getIdStudent()%></p>
+        <p><strong>ID Student:</strong> <%=historyStudent.getIdStudent()%></p>
+        <p><strong>Name Test:</strong> <%=historyStudent.getNameTest()%></p>
         <p><strong>Correct Answers:</strong> <%=historyStudent.getNumOfCorrectAnswer()%></p>
         <p><strong>Total Questions:</strong> <%=historyStudent.getNumOfQuestion()%></p>
         <p><strong>Time Finished:</strong> <%=historyStudent.getTimeFinish()%></p>

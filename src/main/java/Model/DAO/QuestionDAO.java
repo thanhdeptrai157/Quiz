@@ -46,4 +46,16 @@ public class QuestionDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean deleteQuestion(int idQuestion){
+        try{
+            DAO dao = new DAO();
+            String sql = "DELETE FROM question WHERE idTest = ? ;";
+            int count = dao.Update(sql, idQuestion);
+            if(count > 0) return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }
