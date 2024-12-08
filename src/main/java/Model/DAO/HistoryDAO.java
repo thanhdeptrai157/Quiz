@@ -61,6 +61,35 @@ public class HistoryDAO {
         return null;
     }
 
+    public List<HistoryStudent> getListHistoryStudentByIDStudent(int idStuident){
+        List<HistoryStudent> listHistoryStudent = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            DAO dao = new DAO();
+            String sql = "SELECT * FROM historyTest \n" +
+                    "INNER JOIN account ON account.idAccount = historyTest.idStudent\n" +
+                    "WHERE idStudent = ?;";
+            rs = dao.Query(sql, idStuident);
+            while (rs.next()) {
+                int idTest = rs.getInt("idTest");
+                int idHistory = rs.getInt("idHistory");
+                int idStudent = rs.getInt("idStudent");
+                String nameStudent = rs.getString("name");
+                int numOfQuestion = rs.getInt("numberOfQuestion");
+                int numOfCorrectAnswer = rs.getInt("numberOfCorrectAnswer");
+                Timestamp timeFinish = rs.getTimestamp("timeFinish");
+                HistoryStudent historyStudent = new HistoryStudent(idHistory, idStudent, nameStudent, idTest, numOfQuestion, numOfCorrectAnswer, timeFinish);
+                listHistoryStudent.add(historyStudent);
+            }
+
+            return listHistoryStudent;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public List<HistoryTest> GetHistoryTestByIDTeacher(int idTeacher){
         List<HistoryTest> listHistoryTest = new ArrayList<>();
         ResultSet rs = null;

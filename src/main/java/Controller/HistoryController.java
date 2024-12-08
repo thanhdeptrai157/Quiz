@@ -46,7 +46,14 @@ public class HistoryController extends HttpServlet {
             List<HistoryTest> listHistoryTest = historyBO.GetHistoryTest(idTeacher);
             req.getSession().setAttribute("listHistoryTest", listHistoryTest);
             resp.sendRedirect("Teacher/test_manager.jsp");
-        } else if (action.equals("getHistoryStudent")) {
+        }
+        else if (action.equals("listHistoryStudentByIDStudent")) {
+            int idStudent = Integer.parseInt(req.getParameter("idStudent"));
+            List<HistoryStudent> listHistoryStudent = historyBO.GetHistoryStudentByIDStudent(idStudent);
+            req.setAttribute("listHistoryStudent", listHistoryStudent);
+            req.getRequestDispatcher("History/history_student.jsp").forward(req, resp);
+        }
+        else if (action.equals("getHistoryStudent")) {
             int idTest = Integer.parseInt(req.getParameter("idTest"));
             System.out.println("idTest: "+ idTest);
             List<HistoryStudent> listHistoryStudent = historyBO.GetHistoryStudent(idTest);

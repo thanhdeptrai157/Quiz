@@ -21,4 +21,8 @@ public class HistoryBO {
     public List<HistoryTest> GetHistoryTest(int idTeacher){
         return historyDAO.GetHistoryTestByIDTeacher(idTeacher);
     }
+
+    public List<HistoryStudent> GetHistoryStudentByIDStudent(int idStudent){
+        return historyDAO.getListHistoryStudentByIDStudent(idStudent);
+    }
 }

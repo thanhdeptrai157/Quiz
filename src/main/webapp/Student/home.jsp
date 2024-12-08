@@ -33,6 +33,8 @@
     <div>
         <span> <%= account != null ? account.getName() : ""%></span>
         <a href="../authen?action=logout">Đăng xuất</a>
+
+        <a href="../history?action=listHistoryStudentByIDStudent&idStudent=<%=account.getId()%>">History</a>
     </div>
 </header>
 
