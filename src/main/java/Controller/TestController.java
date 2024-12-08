@@ -5,6 +5,7 @@ import Model.BO.TestBO;
 import Model.Bean.Question;
 import Model.Bean.Subject;
 import Model.Bean.Test;
+import com.mysql.cj.conf.ConnectionUrlParser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +14,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/test")
 public class TestController extends HttpServlet {
@@ -45,6 +48,7 @@ public class TestController extends HttpServlet {
             req.setAttribute("test", test);
             List<Question> questions = qbo.getAllQuestionByIDTest(idTest);
             req.setAttribute("questions", questions);
+
             req.getRequestDispatcher("/DoingTest/doing_test.jsp").forward(req, resp);
         }
 
@@ -90,6 +94,17 @@ public class TestController extends HttpServlet {
         if(action.equalsIgnoreCase("getTest")) {
             TestBO tbo = new TestBO();
             req.getSession().setAttribute("testList", tbo.getPublicTestList());
+
+            List<Subject> listSubject = tbo.getAllSubject();
+            Map<Subject, List<Test>> mapTest = new HashMap<>();
+
+            for(Subject s : listSubject){
+                System.out.println(s.getNameSubject());
+                List<Test> tests = tbo.getTestByIDSubject(s.getIdSubject());
+                mapTest.put(s, tests);
+            }
+            req.getSession().setAttribute("mapTest", mapTest);
+
             resp.sendRedirect("Student/home.jsp");
         }
         else if(action.equalsIgnoreCase("getSubject")){

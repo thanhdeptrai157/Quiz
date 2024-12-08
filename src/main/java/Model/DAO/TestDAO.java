@@ -180,7 +180,7 @@ public class TestDAO {
     }
     public List<Test> getTestByIDSubject(int idSubject){
         DAO dao = new DAO();
-        String sql = "SELECT * FROM test WHERE idSubject = ? ;";
+        String sql = "SELECT * FROM test WHERE idSubject = ? AND typeTest = 0 ;";
         List<Test> listTest = new ArrayList<>();
         try {
             ResultSet rs = dao.Query(sql, idSubject);
