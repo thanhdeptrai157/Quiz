@@ -96,7 +96,6 @@ public class TestController extends HttpServlet {
             List<Subject> subjects = tbo.getAllSubject();
             req.setAttribute("subjects", subjects);
         }
-
         else if(action.equalsIgnoreCase("getTestByIdSubject")){
             int idSubject = Integer.parseInt(req.getParameter("idSubject"));
             List<Test> listTest = tbo.getTestByIDSubject(idSubject);

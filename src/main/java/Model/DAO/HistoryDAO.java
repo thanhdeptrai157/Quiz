@@ -5,6 +5,7 @@ import Model.Bean.HistoryTest;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class HistoryDAO {
                 String nameStudent = rs.getString("name");
                 int numOfQuestion = rs.getInt("numberOfQuestion");
                 int numOfCorrectAnswer = rs.getInt("numberOfCorrectAnswer");
-                Date timeFinish = rs.getDate("timeFinish");
+                Timestamp timeFinish = rs.getTimestamp("timeFinish");
                 HistoryStudent historyStudent = new HistoryStudent(idHistory, idStudent, nameStudent, idTest, numOfQuestion, numOfCorrectAnswer, timeFinish);
                 listHistoryStudent.add(historyStudent);
             }
@@ -87,8 +88,4 @@ public class HistoryDAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        Date date =  Date.valueOf("2024-10-10");
-        HistoryStudent historyStudent = new HistoryStudent(1, 1, "giap", 1, 10, 9, date);
-    }
 }

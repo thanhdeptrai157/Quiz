@@ -1,6 +1,7 @@
 package Model.Bean;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class HistoryStudent {
     private int idHistory;
@@ -9,9 +10,9 @@ public class HistoryStudent {
     private int idTest;
     private int numOfQuestion;
     private int numOfCorrectAnswer;
-    private Date timeFinish;
+    private Timestamp timeFinish;
 
-    public HistoryStudent(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Date timeFinish) {
+    public HistoryStudent(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Timestamp timeFinish) {
         this.idHistory = idHistory;
         this.idStudent = idStudent;
         this.nameStudent = nameStudent;
@@ -61,11 +62,11 @@ public class HistoryStudent {
         this.numOfCorrectAnswer = numOfCorrectAnswer;
     }
 
-    public Date getTimeFinish() {
+    public Timestamp getTimeFinish() {
         return timeFinish;
     }
 
-    public void setTimeFinish(Date timeFinish) {
+    public void setTimeFinish(Timestamp timeFinish) {
         this.timeFinish = timeFinish;
     }
 
