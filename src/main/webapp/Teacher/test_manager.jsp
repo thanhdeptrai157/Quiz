@@ -90,7 +90,8 @@
     link.style.color = "inherit"; // Để đồng bộ màu với button
     buttonHistory.appendChild(link);
     card.appendChild(buttonHistory);
-
+    var link = document.createElement('a');
+    link.href = ""
     contentDiv.appendChild(card);
   });
 
