@@ -1,3 +1,4 @@
+<%@ page import="Model.Bean.Account" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,16 +114,35 @@
     <div>
         Quiziz - Tham gia thi trắc nghiệm
     </div>
+    <%
+        Account account = (Account) request.getSession().getAttribute("account");
+        if(account == null){
+
+    %>
+
     <div>
         <a href="Login/login.jsp">Đăng nhập</a>
         <a href="Signup/signup.jsp">Đăng ký</a>
     </div>
+
+    <%
+        }
+        else{
+    %>
+    <div>
+        <span><%=account != null? account.getName() : ""%></span>
+        <a href="authen?action=logout">Đăng xuất</a>
+    </div>
+
+    <%
+        }
+    %>
 </header>
 <section class="main">
-    <form action="test?action=getQuestion" method="post" class="code_input">
+    <form action="test?action=getIdTestTaking" method="post"  class="code_input">
         <h1>Quiziz</h1>
         <div class="input_container">
-            <input type="text" placeholder="Nhập mã tham gia" name="idTest">
+            <input type="text" placeholder="Nhập mã tham gia" name="idTestTaking">
             <button class="btn_join" type="submit">Tham gia</button>
         </div>
     </form>

@@ -1,17 +1,30 @@
 package Model.Bean;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
-public class History {
+public class HistoryStudent {
     private int idHistory;
     private int idStudent;
     private String nameStudent;
     private int idTest;
+    private String nameTest;
     private int numOfQuestion;
     private int numOfCorrectAnswer;
-    private Date timeFinish;
+    private Timestamp timeFinish;
 
-    public History(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Date timeFinish) {
+    public HistoryStudent(int idHistory, int idStudent, String nameStudent, String nameTest, int idTest, int numOfQuestion, int numOfCorrectAnswer, Timestamp timeFinish) {
+        this.idHistory = idHistory;
+        this.idStudent = idStudent;
+        this.nameStudent = nameStudent;
+        this.idTest = idTest;
+        this.nameTest = nameTest;
+        this.numOfQuestion = numOfQuestion;
+        this.numOfCorrectAnswer = numOfCorrectAnswer;
+        this.timeFinish = timeFinish;
+    }
+
+    public HistoryStudent(int idHistory, int idStudent, String nameStudent, int idTest, int numOfQuestion, int numOfCorrectAnswer, Timestamp timeFinish) {
         this.idHistory = idHistory;
         this.idStudent = idStudent;
         this.nameStudent = nameStudent;
@@ -61,11 +74,11 @@ public class History {
         this.numOfCorrectAnswer = numOfCorrectAnswer;
     }
 
-    public Date getTimeFinish() {
+    public Timestamp getTimeFinish() {
         return timeFinish;
     }
 
-    public void setTimeFinish(Date timeFinish) {
+    public void setTimeFinish(Timestamp timeFinish) {
         this.timeFinish = timeFinish;
     }
 
@@ -75,5 +88,13 @@ public class History {
 
     public void setNameStudent(String nameStudent) {
         this.nameStudent = nameStudent;
+    }
+
+    public String getNameTest() {
+        return nameTest;
+    }
+
+    public void setNameTest(String nameTest) {
+        this.nameTest = nameTest;
     }
 }

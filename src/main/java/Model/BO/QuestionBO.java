@@ -15,4 +15,9 @@ public class QuestionBO {
         QuestionDAO questionDAO = new QuestionDAO();
         return questionDAO.selectAllQuestionByIDTest(idTest);
     }
+
+    public boolean deleteQuestion(int idQuestion){
+        QuestionDAO questionDAO = new QuestionDAO();
+        return questionDAO.deleteQuestion(idQuestion);
+    }
 }

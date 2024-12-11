@@ -1,11 +1,12 @@
 package Model.BO;
 
+import Model.Bean.Account;
 import Model.DAO.LoginDAO;
 
 public class LoginBO {
     LoginDAO loginDAO = new LoginDAO();
 
-    public String login(String username, String password) {
+    public Account login(String username, String password) {
         return loginDAO.CheckLogin(username, password);
     }
 

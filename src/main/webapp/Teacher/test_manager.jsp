@@ -1,10 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CONG THANH
-  Date: 12/7/2024
-  Time: 10:10 AM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Model.Bean.Account" %>
+<%@ page import="Model.Bean.HistoryTest" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Bean.Test" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,186 +9,151 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quản Lý Bài Thi</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/Teacher/style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      display: flex;
-      height: 100vh;
-      flex-direction: column;
-    }
-    .sidebar {
+    .popup-form {
+      display: none;
       position: fixed;
-      height: 100%;
-      width: 250px;
-      background-color: #2c3e50;
-      color: white;
-      display: flex;
-      flex-direction: column;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
       padding: 20px;
-    }
-    .sidebar h1 {
-      margin-bottom: 20px;
-      font-size: 18px;
-      text-align: center;
-    }
-    .sidebar button {
-      padding: 10px;
-      margin: 10px 0;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .sidebar button:hover {
-      background-color: #2980b9;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
     }
 
-    .header {
+    .popup-overlay {
+      display: none;
       position: fixed;
-      background-color: #ecf0f1;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #bdc3c7;
+      top: 0;
+      left: 0;
       width: 100%;
-    }
-    .header .user-info {
-      display: flex;
-      align-items: center;
-    }
-    .header .user-info span {
-      margin-right: 15px;
-      font-size: 14px;
-    }
-    .header .user-info button {
-      padding: 5px 10px;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .header .user-info button:hover {
-      background-color: #c0392b;
-    }
-
-    .main {
-      margin-top: 50px;
-      display: flex;
-      flex: 1;
-    }
-
-    .content {
-
-      flex: 1;
-      margin-left: 250px;
-      padding: 20px;
-      overflow-y: auto;
-      background-color: #f4f6f7;
-      margin-top: 15px;
-    }
-    .card {
-      background-color: white;
-      margin-bottom: 20px;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 16px;
-      color: #2c3e50;
-    }
-    .card p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #7f8c8d;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
     }
   </style>
 </head>
+<%
+  Account account = (Account) request.getSession().getAttribute("account");
+  if(account == null){
+    response.sendRedirect("../index.jsp");
+  }
+%>
 <body>
 <div class="header">
   <div class="title">
     <h2>Danh Sách Bài Thi</h2>
   </div>
   <div class="user-info">
-    <span>Tên User</span>
-    <button>Đăng Xuất</button>
+    <span><%= account != null ? account.getName() : ""%></span>
+    <button><a href="../authen?action=logout">Đăng Xuất</a></button>
   </div>
 </div>
 <div class="sidebar">
   <h1>Quản Lý Bài Thi</h1>
-  <button>Thêm Bài Thi</button>
+  <button><a href="../test?action=getSubject">Thêm bài thi</a></button>
 </div>
 <div class="main">
-
-
-  <div class="content">
-    <div class="card">
-      <h3>Bài Thi 1</h3>
-      <p>Số Câu Hỏi: 20</p>
-      <p>Số Người Tham Gia: 50</p>
-      <p>Số Lượt Tham Gia: 120</p>
-    </div>
-
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-    <div class="card">
-      <h3>Bài Thi 2</h3>
-      <p>Số Câu Hỏi: 15</p>
-      <p>Số Người Tham Gia: 30</p>
-      <p>Số Lượt Tham Gia: 60</p>
-    </div>
-
-    <!-- Thêm nhiều card tương tự tại đây -->
-  </div>
+  <div class="content"></div>
 </div>
+
+<div class="popup-overlay" id="popup-overlay"></div>
+<div class="popup-form" id="popup-form">
+  <form action="../test?action=addTestTaking" method="post">
+    <label>ID Test</label>
+    <input type="text" name="idTest" id="idTest" readonly> <br>
+    <label>Time Start</label>
+    <input type="datetime-local" name="timeStart"><br>
+    <label>Time End</label>
+    <input type="datetime-local" name="timeEnd"><br>
+    <button type="submit">OK</button>
+    <button type="button" onclick="closePopup()">Cancel</button>
+  </form>
+</div>
+
+<script>
+  var listTest = [
+    <%
+        List<HistoryTest> tests = (List<HistoryTest>) request.getSession().getAttribute("listHistoryTest");
+        for (int i = 0; i < tests.size(); ++i) {
+            HistoryTest t = tests.get(i);
+    %>
+    {
+      idTest: "<%= t.getIdTest() %>",
+      nameTest: "<%= t.getNameTest() %>",
+      numContestants: "<%= t.getNumberOfContestants() %>",
+      numQuestions: "<%= t.getNumberOfQuestions() %>",
+      code: "<%=t.getCode()%>"
+    }<%= i < tests.size() - 1 ? "," : "" %>
+    <%
+        }
+    %>
+  ];
+
+  var contentDiv = document.querySelector('.content');
+
+  listTest.forEach(test => {
+    var card = document.createElement('div');
+    card.classList.add('card');
+
+    var title = document.createElement('h3');
+    title.textContent = test.nameTest;
+    card.appendChild(title);
+
+    var numQuestions = document.createElement('p');
+    numQuestions.textContent = "Số Câu Hỏi: " + test.numQuestions;
+    card.appendChild(numQuestions);
+
+    var numContestants = document.createElement('p');
+    numContestants.textContent = "Số Người Tham Gia: " + test.numContestants;
+    card.appendChild(numContestants);
+    if(!test.code !== "null"){
+      var codeTest = document.createElement('p');
+      codeTest.textContent = "Code: " + test.code;
+      card.appendChild(codeTest);
+    }
+    var buttonHistory = document.createElement('button');
+    buttonHistory.className = "history-button";
+    var link = document.createElement('a');
+    link.textContent = "Xem lịch sử bài thi";
+    link.href = "../history?action=getHistoryStudent&idTest=" + test.idTest;
+    link.style.textDecoration = "none";
+    link.style.color = "inherit";
+    buttonHistory.appendChild(link);
+    card.appendChild(buttonHistory);
+
+    var buttonAdd = document.createElement('button');
+    buttonAdd.textContent = "Hẹn giờ thi";
+    buttonAdd.addEventListener('click', () => openPopup(test.idTest));
+    buttonAdd.className = "history-button"
+    card.appendChild(buttonAdd);
+
+    var buttonEdit = document.createElement('button');
+    buttonEdit.className = "history-button";
+    var linkedit = document.createElement('a');
+    linkedit.textContent = "Sửa bài thi";
+    linkedit.href = "../test?action=getTestEdit&idTest=" + test.idTest;
+    linkedit.style.textDecoration = "none";
+    linkedit.style.color = "inherit";
+    buttonEdit.appendChild(linkedit);
+    card.appendChild(buttonEdit);
+
+    contentDiv.appendChild(card);
+  });
+
+  function openPopup(idTest) {
+    document.getElementById('idTest').value = idTest;
+    document.getElementById('popup-overlay').style.display = 'block';
+    document.getElementById('popup-form').style.display = 'block';
+  }
+
+  function closePopup() {
+    document.getElementById('popup-overlay').style.display = 'none';
+    document.getElementById('popup-form').style.display = 'none';
+  }
+</script>
 </body>
 </html>
