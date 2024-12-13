@@ -45,7 +45,8 @@ public class AuthenController extends HttpServlet {
             String role = account.getRole();
             req.getSession().setAttribute("account", account);
             if(role.equals("admin")){
-                req.getRequestDispatcher("Login/login.jsp").forward(req, resp);
+                //req.getRequestDispatcher("Login/login.jsp").forward(req, resp);
+                resp.sendRedirect("admin?action=viewList");
             }
             else if(role.equals("student")){
                 resp.sendRedirect("test?action=getTest");
