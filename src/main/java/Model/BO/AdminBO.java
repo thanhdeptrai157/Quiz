@@ -19,4 +19,15 @@ public class AdminBO {
     public List<TestDetail> getListOfTestsBO(int idgv) throws SQLException, ClassNotFoundException {
         return  adminDAO.getListOfTests(idgv);
     }
+
+    public String getNameTeacherByIdBO(int idgv) throws SQLException, ClassNotFoundException {
+        return adminDAO.getNameTeacherDAO(idgv);
+    }
+    public boolean editNameTeacherBO(int idgv,String nameTeacher) throws SQLException {
+        return adminDAO.updateNameTeacher(idgv,nameTeacher);
+    }
+
+    public boolean resetPasswordBO(int idGV) throws SQLException, ClassNotFoundException {
+        return adminDAO.resetPassword(idGV);
+    }
 }

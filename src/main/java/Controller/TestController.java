@@ -36,7 +36,7 @@ public class TestController extends HttpServlet {
             boolean typeTest = Integer.parseInt(req.getParameter("option")) == 1;
             int idTeacher = ((Account)req.getSession().getAttribute("account")).getId();
             System.out.println(nameTest+ " " + typeTest+" "+ timeTest);
-            tbo.insertTest(new Test(nameTest, idSubject, typeTest, 2, timeTest ));
+            tbo.insertTest(new Test(nameTest, idSubject, typeTest, idTeacher, timeTest ));
 
             int idTest = tbo.getMaxIdTest();
             for(int i = 0; i < questions.length; i++){

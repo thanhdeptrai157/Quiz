@@ -62,4 +62,38 @@ public class AdminDAO {
 
         return result;
     }
+
+    public String getNameTeacherDAO(int idgv) throws SQLException, ClassNotFoundException {
+        String result = "";
+        ResultSet rs = null;
+        DAO daoTeacher = new DAO();
+
+        String query = "SELECT * FROM ACCOUNT WHERE role='teacher' and idAccount = ?;";
+        rs = daoTeacher.Query(query,idgv);
+
+        while(rs.next()){
+            result = rs.getString("name");
+            break;
+        }
+        return result;
+    }
+
+    public boolean updateNameTeacher(int idgv,String nameGV) throws SQLException {
+        DAO daoTeacher = new DAO();
+        String query = " UPDATE  ACCOUNT\n" +
+                "SET name = ?\n" +
+                "where idAccount = ?; ";
+        int count = daoTeacher.Update(query,nameGV,idgv);
+        if(count >0) return true;
+        return false;
+    }
+    public boolean resetPassword(int IDGV) throws SQLException {
+        DAO daoTeacher = new DAO();
+        String query = " UPDATE ACCOUNT\n" +
+                "SET password = '123456'\n" +
+                "where role ='teacher' and idAccount = ?; ";
+        int count = daoTeacher.Update(query,IDGV);
+        if(count > 0) return true;
+        else return false;
+    }
 }

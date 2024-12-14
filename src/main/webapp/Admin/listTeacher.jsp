@@ -54,8 +54,8 @@
                     <td><%= teacher.getNumberOfTests() %></td>
                     <td class="action-buttons">
                         <a href="admin?action=viewDetail&idgv=<%=teacher.getIdGV()%>" class="view">View Tests</a>
-                        <a href="#!" class="edit">Edit name</a>
-                        <a href="#!" class="reset">Reset Password</a>
+                        <a href="admin?action=editName&idgv=<%=teacher.getIdGV()%>" class="edit">Edit name</a>
+                        <a href="#!" onclick="showPopup('<%= teacher.getNameGV() %>', '<%= teacher.getIdGV() %>')" class="reset">Reset Password</a>
                         <a href="#!" class="delete">Delete</a>
                     </td>
                 </tr>
@@ -70,5 +70,60 @@
             </tbody>
         </table>
     </div>
+
+<div class="popup-overlay" id="popup-overlay">
+    <div class="popup-content">
+        <p id="popup-message">Reset password cho giáo viên tên là  có ID là </p>
+        <div class="popup-buttons">
+            <button class="confirm" id="confirm-button">Xác nhận</button>
+            <button class="cancel" onclick="hidePopup()">Hủy</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let teacherId = "";
+
+    function showPopup(name, id) {
+     console.log("Name: ", name, "ID: ", id);
+        if (!name || !id) {
+            alert("Dữ liệu giáo viên không hợp lệ!");
+            return;
+        }
+
+        teacherId = id;
+
+       document.getElementById("popup-message").innerText = "Reset password cho giáo viên "+ name + " có id "+id;
+        document.getElementById("popup-overlay").style.display = "flex";
+    }
+
+    function hidePopup() {
+        document.getElementById("popup-overlay").style.display = "none";
+    }
+
+    document.getElementById("confirm-button").addEventListener("click", function () {
+          fetch("${pageContext.request.contextPath}/admin?action=resetPassword&idgv=" + teacherId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+
+        }).then(response => {
+            if (response.ok) {
+                alert("Password reset to 123456 successfully.");
+                hidePopup();
+                window.location.reload();
+            } else {
+                alert("Failed to reset password. Please try again.");
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+        });
+    });
+
+</script>
+
+
 </body>
 </html>
