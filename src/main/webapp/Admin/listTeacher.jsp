@@ -29,7 +29,7 @@
 
     <h1>List of Teachers</h1>
     <div class="container">
-        <a href="#!" class="add-button">Add Teacher</a>
+        <a href="./Admin/addTeacher.jsp" class="add-button">Add Teacher</a>
 
         <table>
             <thead>

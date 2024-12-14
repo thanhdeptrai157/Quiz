@@ -53,7 +53,7 @@ public class AdminDAO {
             int idTestDetail = rs.getInt("idTest");
             String nameTestDetail = rs.getString("nameTest");
              String nameSubjectDetail = rs.getString("nameSubject");
-            String typeTestDetail = rs.getBoolean("typeTest") == true ? "public":"private";
+            String typeTestDetail = rs.getBoolean("typeTest") == true ? "private":"public";
              int idTeacherDetail = idgv;
             int timeDetail = rs.getInt("time");
             TestDetail testDetail = new TestDetail(idTestDetail,nameTestDetail,nameSubjectDetail,typeTestDetail,idTeacherDetail,timeDetail);
@@ -93,6 +93,15 @@ public class AdminDAO {
                 "SET password = '123456'\n" +
                 "where role ='teacher' and idAccount = ?; ";
         int count = daoTeacher.Update(query,IDGV);
+        if(count > 0) return true;
+        else return false;
+    }
+
+    public boolean addTeacherDAO(String name,String username) throws SQLException {
+        DAO daoTeacher = new DAO();
+        String query = " INSERT INTO ACCOUNT(name,username,password,role) \n" +
+                "VALUES (?,?,'123456','teacher'); ";
+        int count = daoTeacher.Update(query,name,username);
         if(count > 0) return true;
         else return false;
     }

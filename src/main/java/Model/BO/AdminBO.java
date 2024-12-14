@@ -30,4 +30,7 @@ public class AdminBO {
     public boolean resetPasswordBO(int idGV) throws SQLException, ClassNotFoundException {
         return adminDAO.resetPassword(idGV);
     }
+    public boolean addTeacherBO(String name,String username) throws SQLException {
+        return adminDAO.addTeacherDAO(name,username);
+    }
 }

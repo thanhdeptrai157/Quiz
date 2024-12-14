@@ -54,6 +54,18 @@ public class AdminController extends HttpServlet {
            }
 
        }
+       else if(action.equals("add")){
+            String nameTeacher = req.getParameter("name");
+            String userNameTeacher = req.getParameter("username");
+           try {
+               addNewTeacher(req,resp,nameTeacher,userNameTeacher);
+               resp.sendRedirect("admin?action=viewList");
+           } catch (SQLException e) {
+               throw new RuntimeException(e);
+           } catch (ClassNotFoundException e) {
+               throw new RuntimeException(e);
+           }
+       }
     }
 
     @Override
@@ -116,6 +128,15 @@ public class AdminController extends HttpServlet {
         else{
             request.setAttribute("errorMessage", "Failed to update teacher's name. Please try again.");
             getNameTeacherById(request, response, idgv);
+        }
+    }
+    public void addNewTeacher(HttpServletRequest request,HttpServletResponse response,String name,String username) throws SQLException, ServletException, IOException, ClassNotFoundException {
+        boolean isSuccess = adminBO.addTeacherBO(name,username);
+        if(isSuccess){
+            System.out.println("Thêm thành công giáo viên thành công "+ name);
+        }
+        else{
+            response.sendRedirect("/Admin/addTeacher.jsp");
         }
     }
 }
