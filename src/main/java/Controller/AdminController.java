@@ -66,6 +66,17 @@ public class AdminController extends HttpServlet {
                throw new RuntimeException(e);
            }
        }
+       else if(action.equals("delete")){
+           int idgv = Integer.parseInt(req.getParameter("idgv"));
+           try {
+               deleteTeacher(req,resp,idgv);
+           } catch (SQLException e) {
+               throw new RuntimeException(e);
+           } catch (ClassNotFoundException e) {
+               throw new RuntimeException(e);
+           }
+
+       }
     }
 
     @Override
@@ -123,7 +134,8 @@ public class AdminController extends HttpServlet {
     public void editNameTeacher(HttpServletRequest request,HttpServletResponse response,int idgv,String nameTeacher) throws SQLException, ServletException, IOException, ClassNotFoundException {
         boolean isSuccess = adminBO.editNameTeacherBO(idgv,nameTeacher);
         if(isSuccess) {
-            viewListTeacher(request, response);
+            //viewListTeacher(request, response);
+            response.sendRedirect("admin?action=viewList");
         }
         else{
             request.setAttribute("errorMessage", "Failed to update teacher's name. Please try again.");
@@ -137,6 +149,19 @@ public class AdminController extends HttpServlet {
         }
         else{
             response.sendRedirect("/Admin/addTeacher.jsp");
+        }
+    }
+
+    public void deleteTeacher(HttpServletRequest request, HttpServletResponse response,int idgv) throws SQLException, IOException, ServletException, ClassNotFoundException {
+        boolean isSuccess = adminBO.deleteTeacherBO(idgv);
+
+        if(isSuccess){
+            System.out.println("Xóa giáo viên thành công "+ idgv);
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
+        else {
+            System.out.println("Xóa giáo viên thất bại "+ idgv);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }

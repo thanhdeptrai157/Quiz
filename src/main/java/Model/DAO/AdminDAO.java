@@ -4,6 +4,7 @@ import Model.Bean.Teacher;
 import Model.Bean.Test;
 import Model.Bean.TestDetail;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -104,5 +105,63 @@ public class AdminDAO {
         int count = daoTeacher.Update(query,name,username);
         if(count > 0) return true;
         else return false;
+    }
+
+    public boolean deleteTeacher(int idgv) throws SQLException {
+        DAO dao = new DAO();
+        Connection connection = null;
+
+
+        try{
+            connection = DatabaseConnection.getConnection();
+            connection.setAutoCommit(false);
+            //Xóa trong questions
+
+            String deleteQuestions = " DELETE FROM QUESTION WHERE idTest  IN " +
+                    " ( SELECT idTest FROM test WHERE idTeacher = ? ); ";
+            dao.Update(deleteQuestions, idgv);
+
+            //Xóa trong historyTest
+            String deleteHistory = " DELETE FROM HISTORYTEST WHERE idTest IN  " +
+                    " ( SELECT idTest FROM test WHERE idTeacher = ? ); ";
+            dao.Update(deleteHistory, idgv);
+
+            //Xóa trong testtaking
+            String deleteTestTaking = " DELETE FROM testtaking WHERE idTest IN " +
+                    " ( SELECT idTest FROM test WHERE idTeacher = ? ); ";
+            dao.Update(deleteTestTaking,idgv);
+
+            //Xóa trong Test
+
+            String deleteTests = " DELETE FROM TEST WHERE idTeacher = ? ; ";
+            dao.Update(deleteTests,idgv);
+
+
+            //Xóa trong account
+            String deleteAccount = " DELETE FROM ACCOUNT WHERE idAccount = ? AND ROLE = 'teacher' ;";
+            int rowsDeleted = dao.Update(deleteAccount,idgv);
+
+            if(rowsDeleted ==0){
+                connection.rollback();
+                return false;
+            }
+
+            connection.commit();
+            connection.setAutoCommit(true);
+            return true;
+
+        } catch (SQLException e) {
+            if (connection != null) {
+                connection.rollback();  // Rollback nếu có lỗi
+            }
+            throw new SQLException("Lỗi khi xóa giáo viên.", e);
+        }
+        finally {
+            if (connection != null) {
+                connection.setAutoCommit(true); // Đảm bảo luôn đặt lại AutoCommit
+            }
+        }
+
+
     }
 }

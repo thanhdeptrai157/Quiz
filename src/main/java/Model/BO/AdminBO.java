@@ -33,4 +33,7 @@ public class AdminBO {
     public boolean addTeacherBO(String name,String username) throws SQLException {
         return adminDAO.addTeacherDAO(name,username);
     }
+    public boolean deleteTeacherBO(int idgv) throws SQLException {
+        return adminDAO.deleteTeacher(idgv);
+    }
 }

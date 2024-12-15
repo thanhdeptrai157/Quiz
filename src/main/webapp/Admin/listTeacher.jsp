@@ -47,7 +47,7 @@
                     if (listTeacher != null && !listTeacher.isEmpty()) {
                         for (Teacher teacher : listTeacher) {
                 %>
-                <tr>
+                <tr id="teacher-row-<%= teacher.getIdGV() %>">
                     <td><%= teacher.getIdGV() %></td>
                     <td><%= teacher.getNameGV() %></td>
                     <td><%= teacher.getUsernameGV() %></td>
@@ -56,7 +56,7 @@
                         <a href="admin?action=viewDetail&idgv=<%=teacher.getIdGV()%>" class="view">View Tests</a>
                         <a href="admin?action=editName&idgv=<%=teacher.getIdGV()%>" class="edit">Edit name</a>
                         <a href="#!" onclick="showPopup('<%= teacher.getNameGV() %>', '<%= teacher.getIdGV() %>')" class="reset">Reset Password</a>
-                        <a href="#!" class="delete">Delete</a>
+                        <a href="javascript:void(0);" onclick="deleteTeacher('<%= teacher.getIdGV() %>')" class="delete">Delete</a>
                     </td>
                 </tr>
                 <%
@@ -121,6 +121,34 @@
             alert("An error occurred. Please try again.");
         });
     });
+
+    function deleteTeacher(id) {
+        if (confirm("Are you sure you want to delete this teacher?")) {
+            fetch("${pageContext.request.contextPath}/admin?action=delete&idgv=" + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Nếu xóa thành công, xóa trực tiếp dòng tương ứng trong bảng
+                    const row = document.getElementById("teacher-row-" + id); // Mỗi dòng của giáo viên sẽ có ID là "teacher-row-{id}"
+                    if (row) {
+                        row.remove(); // Xóa dòng
+                    }
+                    alert("Teacher deleted successfully.");
+                } else {
+                    alert("Failed to delete teacher. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            });
+        }
+    }
+
 
 </script>
 
