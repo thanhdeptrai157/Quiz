@@ -51,8 +51,46 @@
   <input type="hidden" value ="<%=questions.size()%>" name="numberOfQuestion" >
   <input type="hidden" value ="1" name="numberOfCorrectAnswer" class="correct">
 </form>
+
+<div id="alert_wrong" class="alert">
+  <span class="alert-text">Answer is wrong!</span>
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<div id="alert_correct" class="alert">
+  <span class="alert-text">Answer is correct!</span>
+</div>
+
 </body>
 <script>
+
+  const alertBoxWrong = document.getElementById('alert_wrong');
+  const alertBoxCorrect = document.getElementById('alert_correct');
+
+  // Hiển thị alert
+  function showAlert(set) {
+    if(set){
+      alertBoxCorrect.classList.add('show');
+      alertBoxCorrect.classList.remove('hide');
+      setTimeout(() => {
+        alertBoxCorrect.classList.add('hide');
+        alertBoxCorrect.classList.remove('show');
+      }, 3000);
+    }
+    else {
+      alertBoxWrong.classList.add('show');
+      alertBoxWrong.classList.remove('hide');
+      setTimeout(() => {
+        alertBoxWrong.classList.add('hide');
+        alertBoxWrong.classList.remove('show');
+      }, 3000);
+    }
+
+  }
+
+  //==========================================
+
   var questionsData = [
     <%
         for (int i = 0; i < questions.size(); i++) {
@@ -76,7 +114,7 @@
   const questionElement = document.querySelector(".question");
   const answerButtons = document.querySelectorAll(".answer");
   const num_question = document.querySelector(".num_question")
-  let currentQuestionIndex = 0;
+
   const form = document.querySelector(".form");
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -86,39 +124,60 @@
     return array;
   }
 
-
+  let currentQuestionIndex = 0;
   let numCorrect = 0;
   let numCorrectInput = document.querySelector(".correct");
 
-  function loadQuestion() {
-    if(currentQuestionIndex >= questionsData.length){
+  async function loadQuestion() {
+    if (currentQuestionIndex >= questionsData.length) {
       numCorrectInput.value = numCorrect;
       form.submit();
       return;
     }
-    const currentQuestion = questionsData[currentQuestionIndex];
 
-    console.log(currentQuestion.question)
+    const currentQuestion = questionsData[currentQuestionIndex];
+    console.log(currentQuestion.question);
     questionElement.textContent = currentQuestion.question;
 
     const shuffledAnswers = shuffle([...currentQuestion.answers]);
 
+    num_question.textContent = currentQuestionIndex + 1 + "/" + questionsData.length;
+
     answerButtons.forEach((button, index) => {
-      num_question.textContent = currentQuestionIndex + 1 + "/" +  questionsData.length;
       button.textContent = shuffledAnswers[index].text;
-      button.onclick = () => {
+
+      button.onclick = async () => {
         if (shuffledAnswers[index].isCorrect) {
           numCorrect++;
-          alert("Correct");
+          showAlert(true);
+          openCloseAnimation();
         } else {
-          alert("Wrong answer");
+          showAlert(false);
+          openCloseAnimation();
         }
-          currentQuestionIndex = currentQuestionIndex + 1;
+
+        currentQuestionIndex++;
+        await sleep(1000);
         loadQuestion();
       };
     });
   }
+
   loadQuestion();
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function openCloseAnimation(){
+    const overlay = document.getElementById("overlay");
+
+    overlay.classList.add('show');
+
+    overlay.addEventListener("animationend", () => {
+      overlay.classList.remove('show');
+    });
+  }
 </script>
 
 </html>

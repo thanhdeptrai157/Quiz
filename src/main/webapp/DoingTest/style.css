@@ -1,16 +1,18 @@
-*{
+* {
     padding: 0;
     margin: 0;
     color: white;
 }
-.main{
+
+.main {
     background-color: #5d0775;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
 }
-.displayquestion{
+
+.displayquestion {
     width: 100%;
     margin-top: 100px;
     font-size: 35px;
@@ -18,20 +20,23 @@
     flex-direction: column;
     align-items: center;
 }
-.question{
+
+.question {
     background-color: #2f0737;
     width: 60%;
     padding: 50px;
     text-align: center;
     border-radius: 20px;
 }
-.answers_zone{
+
+.answers_zone {
     margin-top: 7%;
     display: flex;
     width: 95%;
     justify-content: space-between;
 }
-.answer{
+
+.answer {
     cursor: pointer;
     height: 300px;
     width: 20%;
@@ -41,16 +46,145 @@
     border-radius: 10px;
     border: none;
     outline: none;
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
 }
-.answer1{
+
+.answer1 {
     background-color: #0773d6;
 }
-.answer2{
+
+.answer2 {
     background-color: #008e95;
 }
-.answer3{
+
+.answer3 {
     background-color: #e87708;
 }
-.answer4{
+
+.answer4 {
     background-color: #f54578;
 }
+
+/* Hover Effect */
+.answer:hover {
+    transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes clickAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.answer.clicked {
+    animation: clickAnimation 0.3s ease-in-out;
+}
+
+/*=================================*/
+/* Style cơ bản cho alert */
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+#alert_correct{
+    background-color: #35d71a;
+}
+
+#alert_wrong{
+    background-color: #f44336;
+}
+
+/* Animation hiển thị */
+@keyframes slideDown {
+    0% {
+        transform: translateX(-50%) translateY(-50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animation ẩn */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+/* Class để hiển thị alert */
+.alert.show {
+    opacity: 1;
+    pointer-events: all;
+    animation: slideDown 0.5s ease-out forwards;
+}
+
+/* Class để ẩn alert */
+.alert.hide {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+
+/*========================================*/
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Overlay for the closing and opening animation */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #004aad, #006eff);
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 998;
+
+}
+.overlay.show{
+    animation: closeOpen 2s ease-in-out forwards;
+}
+
+/* Keyframes for the transition effect */
+@keyframes closeOpen {
+    0% {
+        transform: scaleY(0);
+    }
+    50% {
+        transform: scaleY(1);
+    }
+    100% {
+        transform: scaleY(0);
+    }
+}
+
