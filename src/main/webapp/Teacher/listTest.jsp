@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List Test of Teacher</title>
+    <title>danh sách bài test</title>
 
     <style>
         body {
@@ -94,7 +94,6 @@
             <h1>List of Tests</h1>
         </div>
 
-        <%-- Fetch and display list of test details --%>
         <% List<TestDetail> listTestDetail = (List<TestDetail>) request.getAttribute("listTestDetail"); %>
         <% if (listTestDetail != null && !listTestDetail.isEmpty()) { %>
             <% for (TestDetail test : listTestDetail) { %>
@@ -103,19 +102,17 @@
                     <p><strong>Name Test:</strong> <%= test.getNameTestDetail() %></p>
                     <p><strong>Name Subject:</strong> <%= test.getNameSubjectDetail() %></p>
                     <p><strong>Type Test:</strong> <%= test.getTypeTestDetail() %></p>
-
                    <!-- <p><strong>ID Teacher:</strong> <%= test.getIdTeacherDetail() %></p> -->
-
                     <p><strong>Time:</strong> <%= test.getTimeDetail() %> minutes</p>
                 </div>
             <% } %>
         <% } else { %>
             <div class="not-found">
-                <h2>This teacher does not have any tests :(</h2>
+                <h2>Giáo viên này không có bài test nào:(</h2>
             </div>
         <% } %>
 
-        <a href="javascript:history.back()" class="back-button">Back</a>
+        <a href="javascript:history.back()" class="back-button">Quay lại</a>
     </div>
 </body>
 </html>

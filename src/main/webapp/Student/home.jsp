@@ -111,7 +111,38 @@
     ];
     const testListContainer = document.querySelector('.test_list');
     console.log(testList.length);
+    document.addEventListener('DOMContentLoaded', () => {
+        const startButtons = document.querySelectorAll('.btn_start');
 
+        startButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                const confirmationPopup = document.createElement('div');
+                confirmationPopup.className = 'popup';
+
+                confirmationPopup.innerHTML = `
+                <div class="popup_content">
+                    <h3>Xác nhận</h3>
+                    <p>Bạn có chắc chắn muốn bắt đầu bài thi không?</p>
+                    <button id="confirm" class="popup_btn">Đồng ý</button>
+                    <button id="cancel" class="popup_btn">Hủy</button>
+                </div>
+            `;
+
+                document.body.appendChild(confirmationPopup);
+
+                document.getElementById('confirm').addEventListener('click', () => {
+                    event.target.closest('form').submit();
+                    document.body.removeChild(confirmationPopup);
+                });
+
+                document.getElementById('cancel').addEventListener('click', () => {
+                    document.body.removeChild(confirmationPopup);
+                });
+            });
+        });
+    });
     testList.forEach(test => {
         const testCard = document.createElement('div');
         testCard.className = 'test_card';

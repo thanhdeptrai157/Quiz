@@ -73,14 +73,14 @@
         for (HistoryStudent historyStudent : listStudent) {
     %>
     <div class="history-item">
-        <p><strong>Name:</strong> <%=historyStudent.getNameStudent()%></p>
+        <p><strong>Tên:</strong> <%=historyStudent.getNameStudent()%></p>
         <p><strong>ID:</strong> <%=historyStudent.getIdStudent()%></p>
-        <p><strong>Correct Answers:</strong> <%=historyStudent.getNumOfCorrectAnswer()%></p>
-        <p><strong>Total Questions:</strong> <%=historyStudent.getNumOfQuestion()%></p>
-        <p><strong>Time Finished:</strong> <%=historyStudent.getTimeFinish()%></p>
+        <p><strong>Số câu đúng:</strong> <%=historyStudent.getNumOfCorrectAnswer()%></p>
+        <p><strong>Tổng số câu:</strong> <%=historyStudent.getNumOfQuestion()%></p>
+        <p><strong>Thời gian nộp bài:</strong> <%=historyStudent.getTimeFinish()%></p>
     </div>
     <%}%>
-    <a href="javascript:history.back()" class="back-button">Back</a>
+    <a href="javascript:history.back()" class="back-button">Quay lại</a>
 </div>
 </body>
 </html>

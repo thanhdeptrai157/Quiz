@@ -61,14 +61,13 @@
 <div id="alert_correct" class="alert">
   <span class="alert-text">Answer is correct!</span>
 </div>
-
+<div id="timer" class="timer"></div>
 </body>
 <script>
 
   const alertBoxWrong = document.getElementById('alert_wrong');
   const alertBoxCorrect = document.getElementById('alert_correct');
 
-  // Hiển thị alert
   function showAlert(set) {
     if(set){
       alertBoxCorrect.classList.add('show');
@@ -76,7 +75,7 @@
       setTimeout(() => {
         alertBoxCorrect.classList.add('hide');
         alertBoxCorrect.classList.remove('show');
-      }, 3000);
+      }, 1000);
     }
     else {
       alertBoxWrong.classList.add('show');
@@ -84,12 +83,10 @@
       setTimeout(() => {
         alertBoxWrong.classList.add('hide');
         alertBoxWrong.classList.remove('show');
-      }, 3000);
+      }, 1000);
     }
 
   }
-
-  //==========================================
 
   var questionsData = [
     <%
@@ -157,7 +154,7 @@
         }
 
         currentQuestionIndex++;
-        await sleep(1000);
+        await sleep(500);
         loadQuestion();
       };
     });
@@ -178,6 +175,32 @@
       overlay.classList.remove('show');
     });
   }
+
+  let countdownTime = <%=test.getTime()%> * 60;
+
+  const timerElement = document.getElementById("timer");
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return minutes.toString().padStart(2, "0")+":"+remainingSeconds.toString().padStart(2, "0");
+  }
+
+  function startCountdown() {
+    const interval = setInterval(() => {
+      timerElement.textContent = formatTime(countdownTime);
+
+      if (countdownTime <= 0) {
+        clearInterval(interval);
+        numCorrectInput.value = numCorrect;
+        form.submit();
+      }
+
+      countdownTime--;
+    }, 1000);
+  }
+
+  startCountdown();
 </script>
 
 </html>

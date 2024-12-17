@@ -172,9 +172,16 @@ body {
 
 }
 .overlay.show{
-    animation: closeOpen 2s ease-in-out forwards;
+    animation: closeOpen 1s ease-in-out forwards;
 }
-
+ .timer {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+     font-size: 50px;
+     font-weight: bold;
+     color: #ffffff;
+ }
 /* Keyframes for the transition effect */
 @keyframes closeOpen {
     0% {
