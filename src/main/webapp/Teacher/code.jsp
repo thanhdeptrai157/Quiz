@@ -51,6 +51,7 @@
       color: #dcedc8;
       text-align: center;
     }
+
     .btn-copy {
       margin-top: 10px;
       background-color: #81c784;
@@ -76,8 +77,13 @@
   <div class="code-container" id="codeContainer">
     <%= code != null ? code : ""%>
   </div>
-  <button class="btn-copy" id="copyButton">Copy to Clipboard</button>
+    <button class="btn-copy" id="copyButton">Copy to Clipboard</button>
 </div>
+<button class="btn-copy" >
+  <a href="test?action=loadHistoryTest" style="text-decoration: none; color: white;" >
+    Back
+  </a>
+</button>
 
 <script>
   const copyButton = document.getElementById("copyButton");

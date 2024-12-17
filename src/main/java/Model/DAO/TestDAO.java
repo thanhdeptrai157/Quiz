@@ -85,6 +85,21 @@ public class TestDAO {
         }
     }
 
+    public boolean deleteCodeTest(String codeTest){
+        try {
+            DAO dao = new DAO();
+            int count = dao.Update(
+                    "DELETE FROM testTaking WHERE id = ? ;",
+                    codeTest);
+            if (count > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public List<Test> getAllTest() {
         DAO dao = new DAO();
         String sql = "SELECT * FROM test ;";

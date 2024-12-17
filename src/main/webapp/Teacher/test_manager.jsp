@@ -65,6 +65,7 @@
   <form action="../test?action=addTestTaking" method="post" accept-charset="UTF-8">
     <label>ID Test</label>
     <input type="text" name="idTest" id="idTest" readonly> <br>
+    <input type="hidden" name="oldCode" id="oldCode" readonly> <br>
     <label>Time Start</label>
     <input type="datetime-local" name="timeStart"><br>
     <label>Time End</label>
@@ -127,9 +128,19 @@
 
     var buttonAdd = document.createElement('button');
     buttonAdd.textContent = "Hẹn giờ thi";
-    buttonAdd.addEventListener('click', () => openPopup(test.idTest));
+    buttonAdd.addEventListener('click', () => openPopup(test.idTest, test.code));
     buttonAdd.className = "history-button"
     card.appendChild(buttonAdd);
+
+    var buttonDeleteCode = document.createElement('button');
+    buttonDeleteCode.className = "history-button";
+    var link = document.createElement('a');
+    link.textContent = "Xóa code";
+    link.href = "../test?action=deleteTestTaking&oldCode=" + test.code;
+    link.style.textDecoration = "none";
+    link.style.color = "inherit";
+    buttonDeleteCode.appendChild(link);
+    card.appendChild(buttonDeleteCode);
 
     var buttonEdit = document.createElement('button');
     buttonEdit.className = "history-button";
@@ -144,8 +155,9 @@
     contentDiv.appendChild(card);
   });
 
-  function openPopup(idTest) {
+  function openPopup(idTest, oldCode) {
     document.getElementById('idTest').value = idTest;
+    document.getElementById('oldCode').value = oldCode;
     document.getElementById('popup-overlay').style.display = 'block';
     document.getElementById('popup-form').style.display = 'block';
   }

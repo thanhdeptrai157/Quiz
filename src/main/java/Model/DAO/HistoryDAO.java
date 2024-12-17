@@ -92,6 +92,7 @@ public class HistoryDAO {
         return null;
     }
 
+
     public List<HistoryTest> GetHistoryTestByIDTeacher(int idTeacher){
         List<HistoryTest> listHistoryTest = new ArrayList<>();
         ResultSet rs = null;
@@ -101,7 +102,7 @@ public class HistoryDAO {
                     "ON test.idTest = count_question.idTest\n" +
                     "LEFT JOIN (SELECT idTest, COUNT(idStudent) AS numberOfContestants FROM historyTest GROUP BY idTest) AS count_contestant\n" +
                     "ON test.idTest = count_contestant.idTest\n" +
-                    "LEFT JOIN testtaking ON testtaking.idTest = test.idTest\n"+
+                    "LEFT JOIN testTaking ON testTaking.idTest = test.idTest\n"+
                     "WHERE test.idTeacher = ? ;\n";
             rs = dao.Query(sql, idTeacher);
             while (rs.next()) {

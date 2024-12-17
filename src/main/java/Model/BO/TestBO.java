@@ -81,4 +81,9 @@ public class TestBO {
         testDAO.updateTest(test);
     }
 
+    public boolean deleteCodeTest(String codeTest){
+        TestDAO testDAO = new TestDAO();
+        return testDAO.deleteCodeTest(codeTest);
+    }
+
 }
