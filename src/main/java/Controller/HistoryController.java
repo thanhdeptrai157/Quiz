@@ -3,12 +3,13 @@ package Controller;
 import Model.BO.HistoryBO;
 import Model.Bean.HistoryStudent;
 import Model.Bean.HistoryTest;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -22,6 +23,10 @@ public class HistoryController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         String action = req.getParameter("action");
             if (action.equals("addHistoryStudent")) {
             int idStudent = Integer.parseInt(req.getParameter("idStudent"));
@@ -39,6 +44,10 @@ public class HistoryController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         String action = req.getParameter("action");
         System.out.println(action);
         if (action.equals("listHistoryTest")) {

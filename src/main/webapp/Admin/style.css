@@ -1,0 +1,215 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #000;
+        }
+
+        header {
+            width: 100%;
+            height: 60px;
+            background-color: #222;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        header div:first-child {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        header div:last-child {
+            display: flex;
+            align-items: center;
+        }
+
+        header div:last-child span {
+            margin-right: 15px;
+            font-weight: 500;
+            font-size: 1em;
+            color: #e9ecef;
+        }
+
+        header div:last-child a {
+            background: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-right: 30px;
+        }
+
+        header div:last-child a:hover {
+            background: #c82333;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #004085;
+            margin: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #111316;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .add-button:hover {
+            background-color: #002752;
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #111316;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .action-buttons a {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons .view {
+            background-color: #111316;
+        }
+
+        .action-buttons .edit {
+            background-color: #0e62bb;
+        }
+
+        .action-buttons .reset {
+            background-color: #6c757d;
+        }
+
+        .action-buttons .delete {
+            background-color: #dc3545;
+        }
+
+        .action-buttons a:hover {
+            opacity: 0.8;
+        }
+
+        .not-found {
+            text-align: center;
+            color: #333;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        .popup-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .popup-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup-buttons .confirm {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .popup-buttons .confirm:hover {
+            background-color: #218838;
+        }
+
+        .popup-buttons .cancel {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .popup-buttons .cancel:hover {
+            background-color: #c82333;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+
+

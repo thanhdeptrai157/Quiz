@@ -7,12 +7,12 @@ import Model.Bean.Question;
 import Model.Bean.Subject;
 import Model.Bean.Test;
 import com.mysql.cj.conf.ConnectionUrlParser;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.sql.Timestamp;
@@ -27,6 +27,10 @@ public class TestController extends HttpServlet {
     QuestionBO qbo = new QuestionBO();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         String action = req.getParameter("action");
         if(action.equalsIgnoreCase("add")){
             String [] questions = req.getParameterValues("question");
@@ -36,7 +40,7 @@ public class TestController extends HttpServlet {
             boolean typeTest = Integer.parseInt(req.getParameter("option")) == 1;
             int idTeacher = ((Account)req.getSession().getAttribute("account")).getId();
             System.out.println(nameTest+ " " + typeTest+" "+ timeTest);
-            tbo.insertTest(new Test(nameTest, idSubject, typeTest, 2, timeTest ));
+            tbo.insertTest(new Test(nameTest, idSubject, typeTest, idTeacher, timeTest ));
 
             int idTest = tbo.getMaxIdTest();
             for(int i = 0; i < questions.length; i++){
@@ -133,6 +137,10 @@ public class TestController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         String action = req.getParameter("action");
 
         if(action.equalsIgnoreCase("getTest")) {

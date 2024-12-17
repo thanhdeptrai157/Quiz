@@ -13,7 +13,7 @@
     
 </head>
 <body>
-<form name="signupForm" action="../authen?action=signup" method="post" onsubmit="return validateForm()">
+<form name="signupForm" action="../authen?action=signup" method="post" onsubmit="return validateForm()" accept-charset="UTF-8">
     Name: <input type="text" name="name" required>
     Username: <input type="text" name="username" required>
     Password: <input type="password" name="password" required>

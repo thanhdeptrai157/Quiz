@@ -19,7 +19,7 @@
     String action = questions != null? "edit" : "add";
 %>
 <div class="main">
-    <form action="test?action=<%=action%>" method="post">
+    <form action="test?action=<%=action%>" method="post" accept-charset="UTF-8">
         <input type="hidden" value="<%=test != null ? test.getIdTest(): ""%>" name="idTest">
         <div class="infor_test">
             <label for="nameTest">Tên bài test:</label>

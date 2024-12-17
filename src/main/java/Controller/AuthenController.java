@@ -2,12 +2,13 @@ package Controller;
 
 import Model.BO.LoginBO;
 import Model.Bean.Account;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/authen")
@@ -16,6 +17,9 @@ public class AuthenController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         String mod = req.getParameter("action");
 
         if(mod.equals("login")){
@@ -27,6 +31,9 @@ public class AuthenController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         String action = req.getParameter("action");
         if(action.equals("logout")){
             logout(req, resp);
@@ -44,7 +51,8 @@ public class AuthenController extends HttpServlet {
             String role = account.getRole();
             req.getSession().setAttribute("account", account);
             if(role.equals("admin")){
-                req.getRequestDispatcher("Login/login.jsp").forward(req, resp);
+                //req.getRequestDispatcher("Login/login.jsp").forward(req, resp);
+                resp.sendRedirect("admin?action=viewList");
             }
             else if(role.equals("student")){
                 resp.sendRedirect("test?action=getTest");
