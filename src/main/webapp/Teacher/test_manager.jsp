@@ -62,7 +62,7 @@
 
 <div class="popup-overlay" id="popup-overlay"></div>
 <div class="popup-form" id="popup-form">
-  <form action="../test?action=addTestTaking" method="post">
+  <form action="../test?action=addTestTaking" method="post" accept-charset="UTF-8">
     <label>ID Test</label>
     <input type="text" name="idTest" id="idTest" readonly> <br>
     <label>Time Start</label>

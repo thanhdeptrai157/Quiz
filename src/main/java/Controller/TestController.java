@@ -27,6 +27,10 @@ public class TestController extends HttpServlet {
     QuestionBO qbo = new QuestionBO();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         String action = req.getParameter("action");
         if(action.equalsIgnoreCase("add")){
             String [] questions = req.getParameterValues("question");
@@ -133,6 +137,10 @@ public class TestController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
         String action = req.getParameter("action");
 
         if(action.equalsIgnoreCase("getTest")) {

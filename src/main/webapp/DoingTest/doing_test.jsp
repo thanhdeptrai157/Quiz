@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<form action="history?action=addHistoryStudent" method="post" class="form">
+<form action="history?action=addHistoryStudent" method="post" class="form" accept-charset="UTF-8">
   <input type="hidden" value="<%=account.getId()%>" name="idStudent">
   <input type="hidden" value="<%=account.getName()%>" name="nameStudent">
   <input type="hidden" value="<%=test.getIdTest()%>" name="idTest">

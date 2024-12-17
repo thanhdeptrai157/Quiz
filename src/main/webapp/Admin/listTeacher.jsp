@@ -133,9 +133,9 @@
             .then(response => {
                 if (response.ok) {
                     // Nếu xóa thành công, xóa trực tiếp dòng tương ứng trong bảng
-                    const row = document.getElementById("teacher-row-" + id); // Mỗi dòng của giáo viên sẽ có ID là "teacher-row-{id}"
+                    const row = document.getElementById("teacher-row-" + id);
                     if (row) {
-                        row.remove(); // Xóa dòng
+                        row.remove();
                     }
                     alert("Teacher deleted successfully.");
                 } else {
