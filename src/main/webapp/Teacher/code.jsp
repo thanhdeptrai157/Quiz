@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CONG THANH
-  Date: 12/8/2024
-  Time: 10:44 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,18 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code</title>
   <style>
-
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       background-color: #eafaf1;
       font-family: Arial, sans-serif;
     }
-
 
     .card {
       width: 300px;
@@ -39,7 +31,6 @@
       align-items: center;
       color: white;
     }
-
 
     .code-container {
       background-color: #2e7d32;
@@ -67,6 +58,26 @@
     .btn-copy:hover {
       background-color: #66bb6a;
     }
+
+    .btn-back {
+      margin-top: 10px;
+      background-color: #4caf50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn-back:hover {
+      background-color: #388e3c;
+    }
   </style>
 </head>
 <body>
@@ -77,13 +88,9 @@
   <div class="code-container" id="codeContainer">
     <%= code != null ? code : ""%>
   </div>
-    <button class="btn-copy" id="copyButton">Copy to Clipboard</button>
+  <button class="btn-copy" id="copyButton">Copy to Clipboard</button>
 </div>
-<button class="btn-copy" >
-  <a href="test?action=loadHistoryTest" style="text-decoration: none; color: white;" >
-    Back
-  </a>
-</button>
+<a href="test?action=loadHistoryTest" class="btn-back">Back</a>
 
 <script>
   const copyButton = document.getElementById("copyButton");
