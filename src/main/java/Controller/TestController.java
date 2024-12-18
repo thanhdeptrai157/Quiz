@@ -1,11 +1,9 @@
 package Controller;
 
+import Model.BO.HistoryBO;
 import Model.BO.QuestionBO;
 import Model.BO.TestBO;
-import Model.Bean.Account;
-import Model.Bean.Question;
-import Model.Bean.Subject;
-import Model.Bean.Test;
+import Model.Bean.*;
 import com.mysql.cj.conf.ConnectionUrlParser;
 
 
@@ -26,6 +24,8 @@ public class TestController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     TestBO tbo = new TestBO();
     QuestionBO qbo = new QuestionBO();
+    HistoryBO historyBO = new HistoryBO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -101,6 +101,8 @@ public class TestController extends HttpServlet {
             int idTest = Integer.parseInt(req.getParameter("idTest"));
             String timeStart = req.getParameter("timeStart");
             String timeEnd = req.getParameter("timeEnd");
+            String oldCode = req.getParameter("oldCode");
+            if(oldCode != null) tbo.deleteCodeTest(oldCode);
             String code = tbo.AddTestTaking(idTest, timeStart, timeEnd);
             if(code != null){
                 req.setAttribute("code", code);
@@ -179,5 +181,27 @@ public class TestController extends HttpServlet {
             List<Test> listTest = tbo.getTestByIDSubject(idSubject);
             req.setAttribute("listTest", listTest);
         }
+
+        else if(action.equalsIgnoreCase("deleteTestTaking")){
+            String oldCode = req.getParameter("oldCode");
+            tbo.deleteCodeTest(oldCode);
+
+            System.out.println("Xoa test");
+
+            Account account = (Account) req.getSession().getAttribute("account");
+            int idTeacher = account.getId();
+            List<HistoryTest> listHistoryTest = historyBO.GetHistoryTest(idTeacher);
+            req.getSession().setAttribute("listHistoryTest", listHistoryTest);
+            resp.sendRedirect("Teacher/test_manager.jsp");
+        }
+        else if(action.equalsIgnoreCase("loadHistoryTest")){
+            Account account = (Account) req.getSession().getAttribute("account");
+            int idTeacher = account.getId();
+            List<HistoryTest> listHistoryTest = historyBO.GetHistoryTest(idTeacher);
+            req.getSession().setAttribute("listHistoryTest", listHistoryTest);
+            resp.sendRedirect("Teacher/test_manager.jsp");
+        }
+
+
     }
 }
