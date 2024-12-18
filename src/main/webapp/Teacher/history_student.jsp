@@ -1,8 +1,7 @@
-<%@ page import="Model.Bean.HistoryStudent" %>
-<%@ page import="java.util.List" %>
+<%@ page import="Model.Bean.*" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Model.Bean.HistoryStudent" %>
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: giapwibu
   Date: 12/8/24
@@ -11,7 +10,7 @@
 --%>
 
 <head>
-    <title>Student History</title>
+    <title>Lịch sử làm bài</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,7 +73,7 @@
     %>
     <div class="history-item">
         <p><strong>Tên:</strong> <%=historyStudent.getNameStudent()%></p>
-        <p><strong>ID:</strong> <%=historyStudent.getIdStudent()%></p>
+        <p><strong>Mã số học sinh:</strong> <%=historyStudent.getIdStudent()%></p>
         <p><strong>Số câu đúng:</strong> <%=historyStudent.getNumOfCorrectAnswer()%></p>
         <p><strong>Tổng số câu:</strong> <%=historyStudent.getNumOfQuestion()%></p>
         <p><strong>Thời gian nộp bài:</strong> <%=historyStudent.getTimeFinish()%></p>

@@ -29,15 +29,15 @@
 
     <h1>List of Teachers</h1>
     <div class="container">
-        <a href="./Admin/addTeacher.jsp" class="add-button">Add Teacher</a>
+        <a href="./Admin/addTeacher.jsp" class="add-button">Thêm giáo viên</a>
 
         <table>
             <thead>
                 <tr>
-                    <th>ID Teacher</th>
-                    <th>Name Teacher</th>
-                    <th>UserName</th>
-                    <th>Number of Tests</th>
+                    <th>Mã số</th>
+                    <th>Tên giáo viên</th>
+                    <th>Tên đăng nhập</th>
+                    <th> Số bài kiểm tra đã phát hành </th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -53,10 +53,10 @@
                     <td><%= teacher.getUsernameGV() %></td>
                     <td><%= teacher.getNumberOfTests() %></td>
                     <td class="action-buttons">
-                        <a href="admin?action=viewDetail&idgv=<%=teacher.getIdGV()%>" class="view">View Tests</a>
-                        <a href="admin?action=editName&idgv=<%=teacher.getIdGV()%>" class="edit">Edit name</a>
-                        <a href="#!" onclick="showPopup('<%= teacher.getNameGV() %>', '<%= teacher.getIdGV() %>')" class="reset">Reset Password</a>
-                        <a href="javascript:void(0);" onclick="deleteTeacher('<%= teacher.getIdGV() %>')" class="delete">Delete</a>
+                        <a href="admin?action=viewDetail&idgv=<%=teacher.getIdGV()%>" class="view"> Xem các bài kiểm tra </a>
+                        <a href="admin?action=editName&idgv=<%=teacher.getIdGV()%>" class="edit">Chỉnh sửa tên</a>
+                        <a href="#!" onclick="showPopup('<%= teacher.getNameGV() %>', '<%= teacher.getIdGV() %>')" class="reset">Reset mật khẩu</a>
+                        <a href="javascript:void(0);" onclick="deleteTeacher('<%= teacher.getIdGV() %>')" class="delete">Xóa</a>
                     </td>
                 </tr>
                 <%
@@ -93,7 +93,7 @@
 
         teacherId = id;
 
-       document.getElementById("popup-message").innerText = "Reset password cho giáo viên "+ name + " có id "+id;
+       document.getElementById("popup-message").innerText = "Reset password cho giáo viên "+ id + " : "+name;
         document.getElementById("popup-overlay").style.display = "flex";
     }
 

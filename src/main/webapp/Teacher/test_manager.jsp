@@ -63,11 +63,11 @@
 <div class="popup-overlay" id="popup-overlay"></div>
 <div class="popup-form" id="popup-form">
   <form action="../test?action=addTestTaking" method="post" accept-charset="UTF-8">
-    <label>ID Test</label>
+    <label>Mã bài kiểm tra</label>
     <input type="text" name="idTest" id="idTest" readonly> <br>
-    <label>Time Start</label>
+    <label>Thời gian bắt đầu</label>
     <input type="datetime-local" name="timeStart"><br>
-    <label>Time End</label>
+    <label>Thời gian kết thúc</label>
     <input type="datetime-local" name="timeEnd"><br>
     <button type="submit">OK</button>
     <button type="button" onclick="closePopup()">Cancel</button>

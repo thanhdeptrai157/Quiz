@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Teacher Name</title>
+    <title>Chỉnh sửa tên giáo viên</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Admin/style.css">
     <style>
         body {
@@ -168,18 +168,18 @@
 <% String currentName = (String) request.getAttribute("currentName"); %>
 
 <div class="container">
-    <h1>Edit Teacher Name</h1>
+    <h1>Chỉnh sửa tên giáo viên</h1>
     <form action="${pageContext.request.contextPath}/admin?action=edit" method="post" accept-charset="UTF-8">
         <input type="hidden" name="idTeacher" value="<%= request.getParameter("idgv") %>">
 
         <div class="form-group">
-            <label for="nameTeacher">Teacher Name:</label>
+            <label for="nameTeacher">Tên giáo viên:</label>
             <input type="text" id="nameTeacher" name="nameTeacher" value="<%= currentName %>" required>
         </div>
 
         <div class="form-buttons">
-            <button type="submit" class="confirm">Confirm</button>
-            <button type="button" class="cancel" onclick="history.back();">Cancel</button>
+            <button type="submit" class="confirm">Xác nhận</button>
+            <button type="button" class="cancel" onclick="history.back();">Hủy</button>
         </div>
     </form>
 </div>

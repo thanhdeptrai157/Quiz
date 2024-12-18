@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code</title>
+  <title> Nhận mã bài thi </title>
   <style>
 
     body {
@@ -76,7 +76,7 @@
   <div class="code-container" id="codeContainer">
     <%= code != null ? code : ""%>
   </div>
-  <button class="btn-copy" id="copyButton">Copy to Clipboard</button>
+  <button class="btn-copy" id="copyButton">Sao chép</button>
 </div>
 
 <script>

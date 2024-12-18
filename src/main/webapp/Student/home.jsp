@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trang chủ học sinh</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <%
@@ -34,7 +34,7 @@
         <span> <%= account != null ? account.getName() : ""%></span>
         <a href="../authen?action=logout">Đăng xuất</a>
 
-        <a href="../history?action=listHistoryStudentByIDStudent&idStudent=<%=account.getId()%>">History</a>
+        <a href="../history?action=listHistoryStudentByIDStudent&idStudent=<%=account.getId()%>">Lịch sử</a>
     </div>
 </header>
 
@@ -71,7 +71,7 @@
 
                         <div class="test_card">
                             <h3><%=test.getNameTest()%></h3>
-                            <p><strong>ID:</strong><%=test.getIdTest()%></p>
+                            <p><strong>Mã bài kiểm tra :</strong><%=test.getIdTest()%></p>
                             <p><strong>Giáo viên:</strong><%=test.getIdTeacher()%></p>
                             <p><strong>Thời gian:</strong><%=test.getTime()%> phút </p>
                             <form action="../test?action=getQuestion" method="post">

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Teacher</title>
+    <title>Thêm giáo viên</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -164,20 +164,20 @@
         <h1>Add Teacher</h1>
         <form action="${pageContext.request.contextPath}/admin?action=add" method="POST" accept-charset="UTF-8">
             <div class="form-group">
-                 <label for="name">Name</label>
-                 <input type="text" id="name" name="name" placeholder="Enter teacher's name" required>
+                 <label for="name">Tên giáo viên</label>
+                 <input type="text" id="name" name="name" placeholder="Nhập tên giáo viên" required>
             </div>
 
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter teacher's username" required>
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
             </div>
 
 
 
             <div class="form-actions">
-                <button type="submit" class="add-btn">Add Teacher</button>
-                <button type="button" class="cancel-btn" onclick="window.history.back();">Cancel</button>
+                <button type="submit" class="add-btn">Xác nhận</button>
+                <button type="button" class="cancel-btn" onclick="window.history.back();">Hủy</button>
             </div>
         </form>
     </div>

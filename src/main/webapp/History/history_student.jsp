@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Student History</title>
+    <title>Lịch sử làm bài</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,12 +71,12 @@
         for(HistoryStudent historyStudent : listHistoryStudent){
     %>
     <div class="history-item">
-        <p><strong>Name:</strong> <%=historyStudent.getNameStudent()%></p>
-        <p><strong>ID Student:</strong> <%=historyStudent.getIdStudent()%></p>
-        <p><strong>Name Test:</strong> <%=historyStudent.getNameTest()%></p>
-        <p><strong>Correct Answers:</strong> <%=historyStudent.getNumOfCorrectAnswer()%></p>
-        <p><strong>Total Questions:</strong> <%=historyStudent.getNumOfQuestion()%></p>
-        <p><strong>Time Finished:</strong> <%=historyStudent.getTimeFinish()%></p>
+        <p><strong>Tên học sinh:</strong> <%=historyStudent.getNameStudent()%></p>
+        <p><strong>Mã số học sinh:</strong> <%=historyStudent.getIdStudent()%></p>
+        <p><strong>Tên bài thi:</strong> <%=historyStudent.getNameTest()%></p>
+        <p><strong>Số câu đúng:</strong> <%=historyStudent.getNumOfCorrectAnswer()%></p>
+        <p><strong>Tổng số câu hỏi:</strong> <%=historyStudent.getNumOfQuestion()%></p>
+        <p><strong>Thời gian hoàn thành:</strong> <%=historyStudent.getTimeFinish()%></p>
     </div>
     <%}%>
     <a href="javascript:history.back()" class="back-button">Back</a>

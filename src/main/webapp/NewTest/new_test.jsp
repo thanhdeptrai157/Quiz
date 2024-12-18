@@ -5,7 +5,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Tạo bài kiểm tra</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/NewTest/style.css">
 
 </head>
@@ -22,7 +22,7 @@
     <form action="test?action=<%=action%>" method="post" accept-charset="UTF-8">
         <input type="hidden" value="<%=test != null ? test.getIdTest(): ""%>" name="idTest">
         <div class="infor_test">
-            <label for="nameTest">Tên bài test:</label>
+            <label for="nameTest">Tên bài thi:</label>
             <input type="text" name="nameTest" id="nameTest" value="<%=test !=null? test.getNameTest() : ""%>" required><br>
             <div class="test_details">
                 <div>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div>
-                    <label for="option">Kiểu test:</label>
+                    <label for="option">Kiểu bài thi:</label>
                     <select name="option" id="option">
                         <option value="0" <%= test !=null ? (!test.isTypeTest() ? "selected" : "") : ""%>>Công khai</option>
                         <option value="1" <%= test !=null ? (test.isTypeTest() ? "selected" : "") : ""%>>Đóng</option>

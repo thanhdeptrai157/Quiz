@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Signup Form</title>
+    <title>Trang đăng ký</title>
     <link rel="stylesheet" href="style.css">
     
 </head>
@@ -20,7 +20,7 @@
     Re-enter Password: <input type="password" name="repassword" required>
     Role: <input type="text" name="role" required>
     <div class="btn">
-        <button type="submit">Sign up</button>
+        <button type="submit">Đăng ký</button>
     </div>
 </form>
 </body>

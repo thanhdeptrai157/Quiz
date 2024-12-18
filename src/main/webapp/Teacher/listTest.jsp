@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>danh sách bài test</title>
+    <title>danh sách bài kiểm tra</title>
 
     <style>
         body {
@@ -98,12 +98,12 @@
         <% if (listTestDetail != null && !listTestDetail.isEmpty()) { %>
             <% for (TestDetail test : listTestDetail) { %>
                 <div class="test-item">
-                    <p><strong>ID Test:</strong> <%= test.getIdTestDetail() %></p>
-                    <p><strong>Name Test:</strong> <%= test.getNameTestDetail() %></p>
-                    <p><strong>Name Subject:</strong> <%= test.getNameSubjectDetail() %></p>
-                    <p><strong>Type Test:</strong> <%= test.getTypeTestDetail() %></p>
-                   <!-- <p><strong>ID Teacher:</strong> <%= test.getIdTeacherDetail() %></p> -->
-                    <p><strong>Time:</strong> <%= test.getTimeDetail() %> minutes</p>
+                    <p><strong>Mã bài kiểm tra:</strong> <%= test.getIdTestDetail() %></p>
+                    <p><strong>Tên bài kiểm tra:</strong> <%= test.getNameTestDetail() %></p>
+                    <p><strong>Tên môn học:</strong> <%= test.getNameSubjectDetail() %></p>
+                    <p><strong>Loại bài kiểm tra:</strong> <%= test.getTypeTestDetail() %></p>
+                   <!-- <p><strong>Mã giáo viên:</strong> <%= test.getIdTeacherDetail() %></p> -->
+                    <p><strong>Thời gian bài thi:</strong> <%= test.getTimeDetail() %> minutes</p>
                 </div>
             <% } %>
         <% } else { %>
