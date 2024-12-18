@@ -14,8 +14,8 @@
 <body>
 
 <form action="../authen?action=login" method="post" accept-charset="UTF-8">
-    username <input type="text" name="username">
-    password <input type="password" name="password">
+    Tên đăng nhập <input type="text" name="username">
+    Mật khẩu<input type="password" name="password">
     <div class="btn">
         <button type="submit">Đăng nhập</button>
     </div>
